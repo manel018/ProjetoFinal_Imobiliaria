@@ -28,6 +28,7 @@ public class App extends Application {
         Media media = new Media(new File(filePath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.setVolume(0.10);
         mediaPlayer.play();
         
         launch(args);
