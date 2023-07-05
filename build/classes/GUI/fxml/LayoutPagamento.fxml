@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LayoutPagamentoController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LayoutPagamentoController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1365.0" layoutX="-81.0" layoutY="-48.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Imagens/pagamentos/casa.jpeg" />
+            <Image url="@../imagens/pagamentos/casa.jpeg" />
          </image>
       </ImageView>
       <Button fx:id="btnConcluirPagamento" layoutX="164.0" layoutY="593.0" mnemonicParsing="false" onAction="#clickBtnConcluirPagamento" prefHeight="77.0" prefWidth="466.0" style="-fx-background-color: #0000FF;" text="CONCLUIR" textFill="WHITE">
@@ -33,7 +33,7 @@
       </RadioButton>
       <ImageView fitHeight="61.0" fitWidth="61.0" layoutX="200.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Imagens/pagamentos/codigo-de-barras.png" />
+            <Image url="@../imagens/pagamentos/codigo-de-barras.png" />
          </image>
       </ImageView>
       <RadioButton fx:id="btnRdPix" layoutX="158.0" layoutY="448.0" mnemonicParsing="false" onAction="#clickBtnRdPix" prefHeight="32.0" text="           Pagar via PIX">
@@ -43,17 +43,17 @@
       </RadioButton>
       <ImageView fitHeight="61.0" fitWidth="61.0" layoutX="200.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Imagens/pagamentos/qr.png" />
+            <Image url="@../imagens/pagamentos/qr.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="45.0" fitWidth="148.0" layoutX="469.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Imagens/pagamentos/uteis%20.png" />
+            <Image url="@../imagens/pagamentos/uteis%20.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="61.0" fitWidth="148.0" layoutX="469.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Imagens/pagamentos/imediato.png" />
+            <Image url="@../imagens/pagamentos/imediato.png" />
          </image>
       </ImageView>
       <Label layoutX="338.0" layoutY="38.0" text="Total a Pagar">
@@ -68,7 +68,7 @@
       </TextField>
       <ImageView fitHeight="112.0" fitWidth="123.0" layoutX="209.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Imagens/pagamentos/economizar.png" />
+            <Image url="@../imagens/pagamentos/economizar.png" />
          </image>
       </ImageView>
    </children>

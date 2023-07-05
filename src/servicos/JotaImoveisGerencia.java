@@ -1,7 +1,7 @@
 package servicos;
 
 import java.util.ArrayList;
-import servicos.manArquivos.ManipulaArquivo;
+import servicos.manipulacaoarquivos.ManipulaArquivo;
 
 /**
  * Classe responsável por anunciar e comprar/alugar imóveis na plataforma JotaImoveis.
