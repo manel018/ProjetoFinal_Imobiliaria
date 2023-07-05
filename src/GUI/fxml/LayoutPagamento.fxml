@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LayoutPagamentoController">
+   <children>
+      <ImageView fitHeight="768.0" fitWidth="1365.0" layoutX="-81.0" layoutY="-48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagens/pagamentos/casa.jpeg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnConcluirPagamento" layoutX="164.0" layoutY="593.0" mnemonicParsing="false" onAction="#clickBtnConcluirPagamento" prefHeight="77.0" prefWidth="466.0" style="-fx-background-color: #0000FF;" text="CONCLUIR" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="129.0" layoutY="218.0" text="Escolha a forma de pagamento:" textFill="BLUE">
+         <font>
+            <Font name="Open Sans Semibold" size="36.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="btnRdBoleto" layoutX="161.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnRdBoleto" text="           Boleto Bancário">
+         <font>
+            <Font name="Yu Gothic Medium" size="24.0" />
+         </font>
+      </RadioButton>
+      <ImageView fitHeight="61.0" fitWidth="61.0" layoutX="200.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagens/pagamentos/codigo-de-barras.png" />
+         </image>
+      </ImageView>
+      <RadioButton fx:id="btnRdPix" layoutX="158.0" layoutY="448.0" mnemonicParsing="false" onAction="#clickBtnRdPix" prefHeight="32.0" text="           Pagar via PIX">
+         <font>
+            <Font name="Yu Gothic Medium" size="24.0" />
+         </font>
+      </RadioButton>
+      <ImageView fitHeight="61.0" fitWidth="61.0" layoutX="200.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagens/pagamentos/qr.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="45.0" fitWidth="148.0" layoutX="469.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagens/pagamentos/uteis%20.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="61.0" fitWidth="148.0" layoutX="469.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagens/pagamentos/imediato.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="338.0" layoutY="38.0" text="Total a Pagar">
+         <font>
+            <Font name="Yu Gothic Medium" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPagamento" layoutX="346.0" layoutY="85.0" prefHeight="69.0" prefWidth="206.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="112.0" fitWidth="123.0" layoutX="209.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagens/pagamentos/economizar.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
