@@ -16,7 +16,6 @@ import javafx.scene.image.ImageView;
  * @author Lucas Souza
  * @author Caio Lopes
  * @author Gabriel Araujo
- * aira winner
  */
 public class Card_ImovelController {
     // Atributos da classe
@@ -46,7 +45,6 @@ public class Card_ImovelController {
      * @author Lucas Souza
      * @author Caio Lopes
      * @author Gabriel Araujo
-     * /teste
      */
     public void setDadosImovel(BetaImovel imovel){    //NAO ESQUECER DE TROCAR PARA O TIPO CORRETO CRIADO PELO LUCAS
         
