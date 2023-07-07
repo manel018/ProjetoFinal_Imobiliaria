@@ -89,6 +89,7 @@ public class LayoutPrincipalController extends ControllerMaster{
         label2.setBackground(background);
         label3.setBackground(background);
         label4.setBackground(background);
+        gerenciamento = new JotaImoveisGerencia();
     } 
     @FXML
     void clickSair(ActionEvent event) {
@@ -110,7 +111,6 @@ public class LayoutPrincipalController extends ControllerMaster{
     */
     @FXML
     void clickPesquisar(ActionEvent event) {
-        gerenciamento = new JotaImoveisGerencia();
         boolean temp;
         if(cb_acao.getValue().equalsIgnoreCase("Alugar")){
             temp = true;

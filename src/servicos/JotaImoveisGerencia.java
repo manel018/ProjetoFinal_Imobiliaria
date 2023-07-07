@@ -1,6 +1,9 @@
 package servicos;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
 import servicos.manipulacaoarquivos.ManipulaArquivo;
 
 /**
@@ -19,7 +22,6 @@ public class JotaImoveisGerencia {
      * 
      */
     private void geraArquivoDosImoveis(){
-      
         manArquivosImoveis.abrirArquivoParaGravacao();
         manArquivosImoveis.gravarImovel(gerador.geraArquivo());
         manArquivosImoveis.fechaArquivoGravacao();
@@ -34,6 +36,10 @@ public class JotaImoveisGerencia {
   
         manArquivosImoveis.fecharArquivoLeitura();
     }
+
+    /**
+     * 
+     */
     public void obtemImoveisSelecionados(boolean alugar, String casa_ou_apartamento, String estado, String cidade) {
         if (alugar == true) {
             this.alugar = true;
@@ -58,10 +64,11 @@ public class JotaImoveisGerencia {
                 }
             }
         }
+        gerarImagemImovel();    //Associa uma imagem aleatória à cada Imovel da coleção
     }
 
     /**
-     * Inicializa a 
+     * Inicializa e lê o arquivo de imóveis
      */
     public JotaImoveisGerencia() {
         manArquivosImoveis = new ManipulaArquivo("ListaDeImoveis");
@@ -90,6 +97,27 @@ public class JotaImoveisGerencia {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    
-    
+    /**
+     * Atribui à um String  caminho da imagem associada a cada imóvel selecionado da Lista
+     * 
+     */
+    public void gerarImagemImovel(){
+        ArrayList<Integer> numerosSorteados = new ArrayList<Integer>();
+
+        //Preenche o ArrayList com uma sequência de numeros de 1 a 30
+        for (int i = 1; i<31; i++)
+            numerosSorteados.add(i);
+
+        //Embaralha a ordem dos elementos do Array de números
+        Collections.shuffle(numerosSorteados);
+
+        for (int i = 0; i<10; i++){
+            //Concatena um número aleatório da ArrayList de numeros sorteados entre 1 a 30 a cada loop
+            //com o caminho relativo da imagem
+            if(this.imoveisCadastrados.get(i) instanceof Casa)
+                this.imoveisSelecionados.get(i).setfonteImagem("residencia" + numerosSorteados.get(i)); //se for do tipo Casa
+            else
+                this.imoveisSelecionados.get(i).setfonteImagem("apartamento" + numerosSorteados.get(i)); //se for Apartamento
+        }
+    }
 }

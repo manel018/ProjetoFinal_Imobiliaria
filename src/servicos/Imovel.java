@@ -1,5 +1,7 @@
 package servicos;
 
+import javafx.scene.image.Image;
+
 /**
  * Classe abstrata responsável por definir uma entidade padrão (imóvel) para que seja herdado pela classe casa ou apartamento
  * @author lucas
@@ -7,12 +9,14 @@ package servicos;
 public abstract class Imovel {
   
     private int numeroDoAnuncio;
-    private String descricao;
-    private double valor;
+    private String fonteImagem;
     private String cidade;
     private String estado;
-    private int vagasGaragem;
+    private String descricao;
+    private Double valor;
+    private Integer vagasGaragem;
     private double area;
+    
 
     public Imovel(int numeroDoAnuncio, String descricao, double valor, String cidade, String estado, int vagasGaragem, double area) {
         this.numeroDoAnuncio = numeroDoAnuncio;
@@ -30,9 +34,17 @@ public abstract class Imovel {
      */
     abstract public boolean cadastraImovel();
     
-/*Getters e setters */
+    /* Getters e setters */
     public int getNumeroDoAnuncio() {
         return numeroDoAnuncio;
+    }
+
+    public String getfonteImagem() {
+        return fonteImagem;
+    }
+
+    public void setfonteImagem(String fonteImagem) {
+        this.fonteImagem = fonteImagem;
     }
 
     public void setNumeroDoAnuncio(int numeroDoAnuncio) {
@@ -47,7 +59,7 @@ public abstract class Imovel {
         this.descricao = descricao;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
@@ -85,6 +97,21 @@ public abstract class Imovel {
     public void setArea(double area) {
         this.area = area;
     }
-/*Getters e setters */
-    
+
+    /**
+     * Converte uma {@code String} com o caminho de uma imagem para 
+     * o objeto do tipo {@code Image}.
+     * 
+     * @param fonteImagem Caminho relativo de um arquivo imagem
+     * @return Instância de {@code Image} associada ao argumento.
+     * 
+     * @author Emanuel Victor
+     * @author Lucas Souza
+     * @author Caio Lopes
+     * @author Gabriel Araujo
+     */
+    private Image instanciarImagem(String fonteImagem){
+        Image imagem = new Image(getClass().getResourceAsStream(fonteImagem));
+        return imagem;
+    }
 }

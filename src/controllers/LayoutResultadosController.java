@@ -4,9 +4,11 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
-import servicos.BetaImovel;
+import servicos.Imovel;
+import servicos.JotaImoveisGerencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,10 +38,11 @@ public class LayoutResultadosController extends ControllerMaster {
 
     @FXML
     private GridPane imovelContainer;
-    private ArrayList<BetaImovel> listaImoveis;
+    private ArrayList<Imovel> listaImoveis;
     private int coluna;
     private int linha;
     private int index;
+    private Random gerador = new Random();
 
     @FXML
     private ToggleButton bt_numD1;
@@ -83,28 +86,26 @@ public class LayoutResultadosController extends ControllerMaster {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    
+        //Atribui a lista de imóveis filtrados vindos da janela anterior à variável listaImoveis
+        JotaImoveisGerencia gerenciador = (JotaImoveisGerencia)dados.get(1);
+        //Atribui a lista de imóveis filtrados vindos da janela anterior à variável listaImoveis
+        listaImoveis = gerenciador.getImoveisSelecionados();
+
         inicializaBotoes();
         
         coluna = 0;     //Valor inicial do número de colunas
         linha = 1;      //e linhas para dispor os cards no GridPane
         index = 0;
-        cardBoxes = new ArrayList<VBox>(); 
+        cardBoxes = new ArrayList<VBox>();
 
         try {
 
-            //for(Imovel : ((ArrayList<Imovel>) dados.get(1))){
-                
-            //}
-
-
-
-            for (BetaImovel imovel : listaImoveis){
+            for(Imovel imovel : listaImoveis){
                 cardController = new Card_ImovelController();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/GUI/fxml/Card_Imovel.fxml"));
                 cardBoxes.add(loader.load());
-
+                
                 cardController = loader.getController();  //Intancia um controller do card
 
                 cardController.setDadosImovel(imovel);      //Passa os atributos do Imovel atual para os componentes fx do controller
@@ -113,11 +114,12 @@ public class LayoutResultadosController extends ControllerMaster {
                     coluna = 0;
                     linha++;
                 }
-                imovelContainer.add(cardBoxes.get(index),coluna++,linha);    //Objeto, IndexColuna, IndexLinha
+                imovelContainer.add(cardBoxes.get(index),coluna++,linha);    //(objeto CardImovel, IndexColuna, IndexLinha)
 
-                GridPane.setMargin(cardBoxes.get(index), new Insets(10));    //Objeto, Distância entre compontes
-                index++;  
-            }                
+                GridPane.setMargin(cardBoxes.get(index), new Insets(10));    //(objeto CardImovel, Distância entre compontes)
+                index++;       
+            }       
+                     
         } catch (IOException e) {
             Alert alert = new Alert(AlertType.INFORMATION);     //Alerta de erro caso não seja
             alert.setTitle("Erro");                       //possível carregar o arquivo
@@ -130,73 +132,12 @@ public class LayoutResultadosController extends ControllerMaster {
         lb_nome.setText(nome);
     }
 
-    
-    /*
-    private ArrayList<BetaImovel> geraListaImoveis(){
-        ArrayList<BetaImovel> colecaoImoveis = new ArrayList<BetaImovel>();
-        BetaImovel imovel;
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia1.jpg", "Casa", 
-                            "Gramado", 1890283.89, 3, 440.2);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia2.jpg", "Casa", 
-                            "Palmas", 1090843.65, 3, 234.13);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia3.jpg", "Apartamento", 
-                            "Rio Branco", 900802.46, 3, 317.94);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia2.jpg", "Apartamento", 
-                            "Rio Branco", 900802.46, 3, 317.94);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia3.jpg", "Apartamento", 
-                            "Rio Branco", 900802.46, 3, 317.94);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia4.jpg", "Casa", 
-                            "Gramado", 1890283.89, 3, 440.2);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia1.jpg", "Casa", 
-                            "Gramado", 1890283.89, 3, 440.2);
-        colecaoImoveis.add(imovel);
-        
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia4.jpg", "Casa", 
-                            "Gramado", 1890283.89, 3, 440.2);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia1.jpg", "Casa", 
-                            "Palmas", 1090843.65, 3, 234.13);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia2.jpg", "Casa", 
-                            "Palmas", 1090843.65, 3, 234.13);
-        colecaoImoveis.add(imovel);
-        
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia4.jpg", "Casa", 
-                            "Gramado", 1890283.89, 3, 440.2);
-        colecaoImoveis.add(imovel);
-
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia1.jpg", "Casa", 
-                            "Gramado", 1890283.89, 3, 440.2);
-        colecaoImoveis.add(imovel);
-        
-        imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia4.jpg", "Casa", 
-                            "Gramado", 1890283.89, 3, 440.2);
-        colecaoImoveis.add(imovel); 
-
-        return colecaoImoveis;
-    } */
-
     //Testando a funcionalidade da filtragem de imóveis (Apagar e colocar novos imóveis condizentes com os critérios)
     @FXML
     void clickbtNum(ActionEvent event) {
         String idBotao = ((RadioButton)grupoBotoesG.getSelectedToggle()).getText().substring(7); //Pega a 7º posição da string id
         Integer numDormitorios = Integer.parseInt(idBotao);
-
+    
         //Criar método  "public ArrayList<VBox> instanciaCards(int numDorm, int numGarg)" para adicionar os cards filtrados ao conteiner da tela
         
 

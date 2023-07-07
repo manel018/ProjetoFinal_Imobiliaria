@@ -1,7 +1,8 @@
 
 package controllers;
 
-import servicos.BetaImovel;
+import servicos.Casa;
+import servicos.Imovel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -46,10 +47,7 @@ public class Card_ImovelController {
      * @author Caio Lopes
      * @author Gabriel Araujo
      */
-    public void setDadosImovel(BetaImovel imovel){    //NAO ESQUECER DE TROCAR PARA O TIPO CORRETO CRIADO PELO LUCAS
-        
-        //IMPLEMENTAR MÉTODO get() DE CADA DADO DO TIPO IMOVEL
-
+    public void setDadosImovel(Imovel imovel){
         /* 
          * Cria uma instância de Image por meio da String do objeto imovel
          * que contém o caminho relativo do arquivo imagem no sistema
@@ -57,13 +55,25 @@ public class Card_ImovelController {
         Image imagem = new Image(getClass().getResourceAsStream(imovel.getfonteImagem()));
 
         /* 
-         * Atribui cada propriedade aos elementos na janela
+         * Atribui cada atributo do imóvel aos elementos na janela
          */
+        //Imagem
         img_ImovelImagem.setImage(imagem);
-        lb_ImovelTipo.setText(imovel.getTipo());
-        lb_imovelLocal.setText(imovel.getLocal());
-        lb_imovelPreco.setText(imovel.getPreco().toString());
-        lb_imovelDormitorio.setText(imovel.getDormitorios().toString());
-        lb_imovelArea.setText(imovel.getArea().toString());
+        if (imovel instanceof Casa)
+            lb_ImovelTipo.setText("Casa");
+        else{
+            lb_ImovelTipo.setText("Apartamento");
+        }
+        //Local
+        lb_imovelLocal.setText("" + imovel.getCidade()+ "/" + imovel.getCidade());
+        //Valor
+        if(imovel instanceof Casa){
+            lb_imovelPreco.setText("" + imovel.getValor());
+        }
+        else{
+            lb_imovelPreco.setText("" + (imovel.getValor()*0.01));
+        }
+        //Área
+        lb_imovelArea.setText("" + imovel.getArea());
     }
 }

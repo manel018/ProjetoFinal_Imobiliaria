@@ -43,7 +43,7 @@
          <effect>
             <SepiaTone />
          </effect></ComboBox>
-      <ComboBox fx:id="cb_transacao" layoutX="706.0" layoutY="237.0" prefHeight="26.0" prefWidth="182.0" promptText="Alugar / Comprar">
+      <ComboBox fx:id="cb_acao" layoutX="706.0" layoutY="237.0" prefHeight="26.0" prefWidth="182.0" promptText="Alugar / Comprar">
          <effect>
             <SepiaTone />
          </effect></ComboBox>

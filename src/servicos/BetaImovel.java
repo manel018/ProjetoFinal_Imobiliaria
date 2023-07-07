@@ -72,12 +72,12 @@ public class BetaImovel {
 
     /**
      * Converte uma {@code String} com o caminho de uma imagem para 
-     * o objeto do tipo {@code Image}.
+     * um objeto do tipo {@code Image}.
      * 
      * @param fonteImagem Caminho relativo de um arquivo imagem
      * @return Instância de {@code Image} associada ao argumento.
      * 
-     * @author Emanuel Victor
+     * @author Emanuel Victor 
      * @author Lucas Souza
      * @author Caio Lopes
      * @author Gabriel Araujo
