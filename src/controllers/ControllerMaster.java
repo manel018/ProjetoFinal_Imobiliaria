@@ -19,6 +19,7 @@ import javafx.stage.Stage;
  * @author Lucas Souza
  * @author Caio Lopes
  * @author Gabriel Araujo
+ * teste
  */
 public abstract class ControllerMaster implements Initializable{
     protected ArrayList<Object> dados;   //Armazena todos os dados da controller corrente
