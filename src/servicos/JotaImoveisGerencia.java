@@ -27,10 +27,30 @@ public class JotaImoveisGerencia {
   
         manArquivosImoveis.fecharArquivoLeitura();
     }
-    public void obtemImoveisSelecionados(boolean alugar, String casa_ou_apartamento, String estado, String cidade){
-        //Apartamento
-        //Estado
-        //Cidade
+    public void obtemImoveisSelecionados(boolean alugar, String casa_ou_apartamento, String estado, String cidade) {
+        if (alugar == true) {
+            this.alugar = true;
+        }
+        if (casa_ou_apartamento.equalsIgnoreCase("Casa")) {
+            for (Imovel temp_imovel : this.imoveisCadastrados) {
+                if (temp_imovel instanceof Casa && temp_imovel.getCidade().equalsIgnoreCase(estado) && temp_imovel.getEstado().equalsIgnoreCase(estado)) {
+                    this.imoveisSelecionados.add(temp_imovel);
+                }
+                if (this.imoveisSelecionados.size() == 10) {
+                    break;
+                }
+            }
+        }
+        if (casa_ou_apartamento.equalsIgnoreCase("Apartamento")) {
+            for (Imovel temp_imovel : this.imoveisCadastrados) {
+                if (temp_imovel instanceof Apartamento && temp_imovel.getCidade().equalsIgnoreCase(estado) && temp_imovel.getEstado().equalsIgnoreCase(estado)) {
+                    this.imoveisSelecionados.add(temp_imovel);
+                }
+                if (this.imoveisSelecionados.size() == 10) {
+                    break;
+                }
+            }
+        }
 
     }
     public JotaImoveisGerencia() {
