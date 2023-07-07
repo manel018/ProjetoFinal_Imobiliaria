@@ -39,7 +39,7 @@ public class LayoutPixController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
     }
     
 }

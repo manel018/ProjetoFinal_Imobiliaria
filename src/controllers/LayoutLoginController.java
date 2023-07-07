@@ -66,12 +66,10 @@ public class LayoutLoginController extends ControllerMaster{
   
         dados.add(nome);           //Salva o nome fornecido na coleção de dados
 
-        
-
         LayoutPrincipalController principalController = new LayoutPrincipalController(); //Classe controller da cena seguinte
-        principalController.setDados(dados);
         
         try {
+            //Chama a próxima cena enviando a coleção de dados (com a String nome) para o próximo controller
             chamaProximaCena("/GUI/fxml/LayoutPrincipal.fxml", principalController, dados);
             
             //Fecha a janela atual

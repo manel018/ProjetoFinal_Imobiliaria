@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -21,6 +22,7 @@ import javafx.scene.layout.CornerRadii;
 
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import servicos.GeraCasas;
 import servicos.JotaImoveisGerencia;
 
 public class LayoutPrincipalController extends ControllerMaster{
@@ -40,7 +42,7 @@ public class LayoutPrincipalController extends ControllerMaster{
     private ComboBox<String> cb_imovel;
 
     @FXML
-    private ComboBox<String> cb_transacao;
+    private ComboBox<String> cb_acao;
 
     @FXML
     private ImageView fundo_principal;
@@ -61,7 +63,6 @@ public class LayoutPrincipalController extends ControllerMaster{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
-        gerenciamento = new JotaImoveisGerencia();  //Instancia o gerenciador de imóveis
 
         ObservableList<String> casaApto = FXCollections.observableArrayList();  
         casaApto.add("Apartamento"); casaApto.add("Casa");                  
@@ -79,7 +80,7 @@ public class LayoutPrincipalController extends ControllerMaster{
         
         ObservableList<String> oq = FXCollections.observableArrayList();
         oq.add("Alugar"); oq.add("Comprar");
-        cb_transacao.setItems(oq);
+        cb_acao.setItems(oq);
          
         BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
         Background background = new Background(backgroundFill);
@@ -94,12 +95,36 @@ public class LayoutPrincipalController extends ControllerMaster{
         System.exit(0);
     }
     @FXML
+    void clickEstado(ActionEvent event) {
+
+        GeraCasas temp_casas = new GeraCasas();
+        ArrayList<String> cidades_ = temp_casas.getConjuntoMunicipioEstado().get(cb_estado.getValue());
+        ObservableList<String> listaCidades = FXCollections.observableArrayList();
+        listaCidades.addAll(cidades_);
+        cb_cidade.setItems(listaCidades);
+        cb_cidade.setDisable(false);
+    }
+
+    /*
+    * Baseado nos campos que estão preenchidos ou não, faz uma pesquisa filtrada
+    */
+    @FXML
     void clickPesquisar(ActionEvent event) {
-        /*
-         * Baseado nos campos que estão preenchidos ou não, fazer uma pesquisa filtrada
-        */
+        gerenciamento = new JotaImoveisGerencia();
+        boolean temp;
+        if(cb_acao.getValue().equalsIgnoreCase("Alugar")){
+            temp = true;
+        }else{
+            temp = false;
+        }
+        
+        gerenciamento.obtemImoveisSelecionados(temp, cb_acao.getValue(), cb_estado.getValue(), cb_cidade.getValue());
+        
+        dados.add(gerenciamento);   //Adiciona o gerenciador de impoveis na coleção de dados do controller
+        
         LayoutResultadosController resultadosController = new LayoutResultadosController();
         try {
+            //Chama a próxima cena enviando a coleção de dados atuais para o próximo controller
             chamaProximaCena("/GUI/fxml/LayoutResultados.fxml", resultadosController, dados);
 
             //Fecha a janela atual

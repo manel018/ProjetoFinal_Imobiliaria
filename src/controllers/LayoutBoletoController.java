@@ -1,6 +1,5 @@
 package controllers;
 
-import static java.lang.System.exit;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,11 +21,11 @@ public class LayoutBoletoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      
     }    
     @FXML
     void clickBtnSairBoleto(ActionEvent event) {
-        exit(1);
+        System.out.println(1);
      /**
      * Função do Botao para Sair do programa
      */

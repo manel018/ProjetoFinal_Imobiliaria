@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import servicos.JotaImoveisGerencia;
 
 public class App extends Application {
     

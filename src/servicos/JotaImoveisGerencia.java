@@ -15,12 +15,19 @@ public class JotaImoveisGerencia {
     private ManipulaArquivo manArquivosImoveis;
     private boolean alugar = false;
     
+    /**
+     * 
+     */
     private void geraArquivoDosImoveis(){
       
         manArquivosImoveis.abrirArquivoParaGravacao();
         manArquivosImoveis.gravarImovel(gerador.geraArquivo());
         manArquivosImoveis.fechaArquivoGravacao();
     }
+
+    /**
+     * 
+     */
     private void leArquivosDosImoveis(){
         manArquivosImoveis.abrirArquivoParaLeitura();
         imoveisCadastrados = new ArrayList<>(manArquivosImoveis.lerArquivo());
@@ -51,8 +58,11 @@ public class JotaImoveisGerencia {
                 }
             }
         }
-
     }
+
+    /**
+     * Inicializa a 
+     */
     public JotaImoveisGerencia() {
         manArquivosImoveis = new ManipulaArquivo("ListaDeImoveis");
         geraArquivoDosImoveis();
@@ -74,6 +84,10 @@ public class JotaImoveisGerencia {
 
     public void setImoveisSelecionados(ArrayList<Imovel> imoveisSelecionados) {
         this.imoveisSelecionados = imoveisSelecionados;
+    }
+
+    public void getGerador() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

@@ -83,14 +83,22 @@ public class LayoutResultadosController extends ControllerMaster {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    
         inicializaBotoes();
-        listaImoveis = new ArrayList<BetaImovel>(geraListaImoveis());
+        
         coluna = 0;     //Valor inicial do número de colunas
         linha = 1;      //e linhas para dispor os cards no GridPane
         index = 0;
         cardBoxes = new ArrayList<VBox>(); 
 
         try {
+
+            //for(Imovel : ((ArrayList<Imovel>) dados.get(1))){
+                
+            //}
+
+
+
             for (BetaImovel imovel : listaImoveis){
                 cardController = new Card_ImovelController();
                 FXMLLoader loader = new FXMLLoader();
@@ -123,7 +131,7 @@ public class LayoutResultadosController extends ControllerMaster {
     }
 
     
-
+    /*
     private ArrayList<BetaImovel> geraListaImoveis(){
         ArrayList<BetaImovel> colecaoImoveis = new ArrayList<BetaImovel>();
         BetaImovel imovel;
@@ -163,7 +171,7 @@ public class LayoutResultadosController extends ControllerMaster {
         imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia1.jpg", "Casa", 
                             "Palmas", 1090843.65, 3, 234.13);
         colecaoImoveis.add(imovel);
-/*
+
         imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia2.jpg", "Casa", 
                             "Palmas", 1090843.65, 3, 234.13);
         colecaoImoveis.add(imovel);
@@ -178,10 +186,10 @@ public class LayoutResultadosController extends ControllerMaster {
         
         imovel = new BetaImovel("/GUI/Imagens/imoveis/residencia4.jpg", "Casa", 
                             "Gramado", 1890283.89, 3, 440.2);
-        colecaoImoveis.add(imovel); */
+        colecaoImoveis.add(imovel); 
 
         return colecaoImoveis;
-    } 
+    } */
 
     //Testando a funcionalidade da filtragem de imóveis (Apagar e colocar novos imóveis condizentes com os critérios)
     @FXML
@@ -200,7 +208,11 @@ public class LayoutResultadosController extends ControllerMaster {
         }*/
     }
 
-    void inicializaBotoes(){
+    /**
+     * Aplica os grupos de botões dentro de um ToggleGroup
+     */
+    private void inicializaBotoes(){
+        //Botões nº Dormitório
         grupoBotoesD = new ToggleGroup();
         bt_numG1.setToggleGroup(grupoBotoesD);
         bt_numG2.setToggleGroup(grupoBotoesD);
@@ -208,6 +220,7 @@ public class LayoutResultadosController extends ControllerMaster {
         bt_numG4.setToggleGroup(grupoBotoesD);
         bt_numG5.setToggleGroup(grupoBotoesD);
 
+        //Botões nº Garagem
         grupoBotoesG = new ToggleGroup();
         bt_numG1.setToggleGroup(grupoBotoesG);
         bt_numG2.setToggleGroup(grupoBotoesG);
