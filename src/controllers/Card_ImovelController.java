@@ -27,8 +27,6 @@ public class Card_ImovelController {
     @FXML
     private Label lb_imovelArea;
     @FXML
-    private Label lb_imovelDormitorio;
-    @FXML
     private Label lb_imovelGaragens;
     @FXML
     private Label lb_imovelLocal;
@@ -65,13 +63,13 @@ public class Card_ImovelController {
             lb_ImovelTipo.setText("Apartamento");
         }
         //Local
-        lb_imovelLocal.setText("" + imovel.getCidade()+ "/" + imovel.getCidade());
+        lb_imovelLocal.setText("" + imovel.getEstado()+ "/" + imovel.getCidade());
         //Valor
         if(imovel instanceof Casa){
             lb_imovelPreco.setText("" + imovel.getValor());
         }
         else{
-            lb_imovelPreco.setText("" + (imovel.getValor()*0.01));
+            lb_imovelPreco.setText("" + (imovel.getValor()*0.01));  //O aluguel é 1% do valor da casa
         }
         //Área
         lb_imovelArea.setText("" + imovel.getArea());

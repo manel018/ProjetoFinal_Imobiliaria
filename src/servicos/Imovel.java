@@ -17,7 +17,9 @@ public abstract class Imovel {
     private Integer vagasGaragem;
     private double area;
     
-
+    /**
+     * Construtor da classe
+     */
     public Imovel(int numeroDoAnuncio, String descricao, double valor, String cidade, String estado, int vagasGaragem, double area) {
         this.numeroDoAnuncio = numeroDoAnuncio;
         this.descricao = descricao;
@@ -114,4 +116,19 @@ public abstract class Imovel {
         Image imagem = new Image(getClass().getResourceAsStream(fonteImagem));
         return imagem;
     }
+
+    /**
+     * Indica se algum outro imóvel é igual a este.
+     * <p>Para isto, compara os atributos {@code cidade} e {@code estado}, além de 
+     * verificar se ambos são instâncias das subclasses {@code Casa} ou {@code Apartamento}
+     * 
+     * @param imovelComparado objeto {@code Imovel} que se deseja comparar
+     * @return {@code true} se respectivos atributos do imóvel coincide com os do Imóvel do argumento; {@code false} caso contrário. 
+     
+    public boolean igualA(Imovel imovelComparado){
+        if(imovelComparado.getCidade().equalsIgnoreCase(cidade) && imovelComparado.getEstado().equalsIgnoreCase(estado))
+            return true;
+        else
+            return false;
+        }*/
 }
