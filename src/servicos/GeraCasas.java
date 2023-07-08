@@ -23,7 +23,7 @@ public class GeraCasas {
 
         //O HashMap é preenchido da seguinte forma:
         //KEY: (String) Nome Do Estado 
-        //VALUE:  (ArrayList<String>) Lista com 10 cidades
+        //VALUE:  (ArrayList<String>) Lista com 10 principais cidades
         conjuntoMunicipioEstado.put("Acre",
                 new ArrayList<>(Arrays.asList("Rio Branco", "Cruzeiro do Sul", "Sena Madureira", "Tarauacá", "Feijó",
                                 "Brasiléia", "Plácido de Castro", "Senador Guiomard", "Xapuri", "Marechal Thaumaturgo")));
@@ -113,8 +113,7 @@ public class GeraCasas {
      * 
      * @return
      */
-    public ArrayList<Imovel> geraArquivo() {
-        int numeroAnuncio = 0;
+    public ArrayList<Imovel> geraImoveis() {
 
         //Gerando 30 descrições aleatórias diferentes para uma Casa
         ArrayList<String> descricoesCasa = new ArrayList<>();
@@ -228,33 +227,112 @@ public class GeraCasas {
 
         ArrayList<Imovel> retorno = new ArrayList<>();
 
+        //Variáveis locais para armazenar os atributos dos imóveis aleatórios gerados
+        int numeroAnuncio = 0;
+        String nomeDoCondominio;
+        String descricaoImovel;
+        String estado;
+        String cidade;
+        double valor;
+        int vagasGaragem;
+        int andar;
+        double area;
+        boolean possuiElevador;
+
+        //Repete (quantidade de estado) vezes
         for (String temp_string : conjuntoMunicipioEstado.keySet()) {
-            for (int k = 0; k < 12; k++) {
-                                        //Repete (quantidade de cidades) vezes
+                //Repete (quantidade de cidades) vezes
                 for (int i = 0; i < conjuntoMunicipioEstado.get(temp_string).size(); i++) {
+
+                        //Copia a cidade corrente da Lista de cidades do estado atual
+                        cidade = conjuntoMunicipioEstado.get(temp_string).get(i);
+
+                        //copia o estado atual
+                        estado = temp_string; 
+
+
+                        //Realiza 10 repetições (gera 10 CASAS) para cada cidade de um estado
+                        for (int k = 0; k < 10; k++) {
+                                
+                        //Pega um nome de condomínio aleatório da Lista nomesDoCondominio
+                        nomeDoCondominio = nomesDoCondominio.get(gerador.nextInt(nomesDoCondominio.size()));
+
+                        //Pega uma descrição aleatória dentro da Lista descricoesCasa
+                        descricaoImovel = descricoesCasa.get(gerador.nextInt(descricoesCasa.size()));
+
+                        //Sorteia um preço entre R$200.000,00 e (<)R$2.00.000,00 para o ímovel
+                        valor = gerador.nextDouble(200000,2000000);  
+
+                        //Sorteia uma quantidade aleatória de garagens de um imóvel (entre 1 e 4)
+                        vagasGaragem = gerador.nextInt(1,5);
+
+                        //Sorteia uma área para a casa (entre 100m² e (<)400m²)
+                        area = gerador.nextDouble(100,400);
+
+                        //Cria e adicona a casa na lista
+                        Casa casa = new Casa("",nomeDoCondominio, numeroAnuncio, descricaoImovel, valor, cidade, estado, vagasGaragem,  area);
+                        retorno.add(casa);
+
+                        /* 
+                        casa.setDescricaoQuintal("");
+                        casa.setNomeDoCondominio("");
                         retorno.add(new Casa("", nomesDoCondominio.get(gerador.nextInt(nomesDoCondominio.size())),
                                     numeroAnuncio, descricoesCasa.get(gerador.nextInt(descricoesCasa.size())),
-                                    (gerador.nextInt(500000,2500000)),
-                                    conjuntoMunicipioEstado.get(temp_string).get(gerador.nextInt(conjuntoMunicipioEstado.get(temp_string).size())),
-                                    temp_string, (gerador.nextInt(4) + 1), (gerador.nextInt(400) + 10.0)));
-                        numeroAnuncio++; //Incrementa a identificação para o próximo imóvel
+                                    (gerador.nextDouble(500000,2500000)),
+                                    conjuntoMunicipioEstado.get(temp_string).get(i),
+                                    temp_string, (gerador.nextInt(4) + 1), (gerador.nextInt(100,401))));
+                        */
+                        numeroAnuncio++; //Incrementa a identificação para o próximo imóvel       
+                        }
+
+                        //Realiza 10 repetições (gera 10 APARTAMENTOS) para cada cidade de um estado
+                        for (int k = 0; k < 10; k++) {
+                
+                        //Pega um nome de condomínio aleatório da Lista nomesDoCondominio
+                        nomeDoCondominio = nomesDoCondominio.get(gerador.nextInt(nomesDoCondominio.size()));
+
+                        //Pega uma descrição aleatória dentro da Lista descricoesApartamento
+                        descricaoImovel = descricoesApartamento.get(gerador.nextInt(descricoesApartamento.size()));
+
+                        //Sorteia um preço entre R$200.000,00 e (<)R$2.00.000,00 para o ímovel
+                        valor = gerador.nextDouble(200000,2000000);
+
+                        //Sorteia uma quantidade aleatória de garagens de um imóvel (entre 1 e 4)
+                        vagasGaragem = gerador.nextInt(1,5);
+
+                        //Sorteia o andar de um apartamento no prédio (entre 1 e 20)
+                        andar = gerador.nextInt(1,21);
+
+                        //Sorteia uma área para o apartamento (entre 40m² e (<)150m²)
+                        area = gerador.nextDouble(100,150);
+
+                        //Informa se o prédio possui ou não elevador
+                        possuiElevador = gerador.nextBoolean();
+
+                        //Cria e adicona o apartamento na lista
+                        Apartamento apartamento = new Apartamento(andar, possuiElevador, numeroAnuncio, descricaoImovel, valor, cidade, estado, vagasGaragem,  area);
+                        retorno.add(apartamento);
+
+                        /*
+                        for (String temp_string : conjuntoMunicipioEstado.keySet()) {   //Percorre os 26 estados
+                        for (int k = 0; k < 10; k++) {
+                                for (int i = 0; i < conjuntoMunicipioEstado.get(temp_string).size(); i++) {
+                                retorno.add(new Apartamento(gerador.nextInt(20), gerador.nextBoolean(), numeroAnuncio,
+                                        descricoesApartamento.get(gerador.nextInt(descricoesApartamento.size())),
+                                        (100000 + gerador.nextInt(1000000000)),
+                                        conjuntoMunicipioEstado.get(temp_string)
+                                                .get(gerador.nextInt(conjuntoMunicipioEstado.get(temp_string).size())),
+                                        temp_string, (gerador.nextInt(4) + 1), (gerador.nextInt(400) + 10.0)));
+                                }
+                        }
+                        }
+                        */
+
+                        numeroAnuncio++; //Incrementa a identificação para o próximo imóvel                     
                         }
             }
         }
-        for (String temp_string : conjuntoMunicipioEstado.keySet()) {   //Percorre os 26 estados
-            for (int k = 0; k < 12; k++) {
-                for (int i = 0; i < conjuntoMunicipioEstado.get(temp_string).size(); i++) {
-                    retorno.add(new Apartamento(gerador.nextInt(20), gerador.nextBoolean(), numeroAnuncio,
-                            descricoesApartamento.get(gerador.nextInt(descricoesApartamento.size())),
-                            (100000 + gerador.nextInt(1000000000)),
-                            conjuntoMunicipioEstado.get(temp_string)
-                                    .get(gerador.nextInt(conjuntoMunicipioEstado.get(temp_string).size())),
-                            temp_string, (gerador.nextInt(4) + 1), (gerador.nextInt(400) + 10.0)));
-
-                }
-            }
-
-        }
+        
 
         return retorno;
     }

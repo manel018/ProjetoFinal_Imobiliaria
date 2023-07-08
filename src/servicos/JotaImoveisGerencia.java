@@ -8,38 +8,77 @@ import servicos.manipulacaoarquivos.ManipulaArquivo;
 
 /**
  * Classe responsável por anunciar e comprar/alugar imóveis na plataforma JotaImoveis.
- * @author lucas
+ * @author Lucas Henrique
  */
 public class JotaImoveisGerencia {
     
     private ArrayList<Imovel> imoveisCadastrados;
     private ArrayList<Imovel> imoveisSelecionados;
-    private GeraCasas gerador = new GeraCasas();
+    private GeraCasas gerador;
     private ManipulaArquivo manArquivosImoveis;
     private boolean alugar = false;
     
     /**
-     * 
+     * Construtor da classe
+     * <p>
+     * Inicializa automaticamente suas variáveis, 
+     * incluindo a lista {@code ArrayList<Imovel>} imoveisCadastrados
+     */
+    public JotaImoveisGerencia() {
+        gerador = new GeraCasas();
+        manArquivosImoveis = new ManipulaArquivo("ListaDeImoveis");
+        geraArquivoDosImoveis();
+        leArquivosDosImoveis();
+    }
+
+    //Getters
+    public ArrayList<Imovel> getImoveisSelecionados() {
+        return imoveisSelecionados;
+    }
+    public ArrayList<Imovel> getImoveisCadastrados() {
+        return imoveisCadastrados;
+    }
+    //Setters
+    public void setImoveisCadastrados(ArrayList<Imovel> imoveisCadastrados) {
+        this.imoveisCadastrados = imoveisCadastrados;
+    }
+    public void setImoveisSelecionados(ArrayList<Imovel> imoveisSelecionados) {
+        this.imoveisSelecionados = imoveisSelecionados;
+    }
+
+    
+    /**
+     * Grava um arquivo contendo as informações de um 
+     * conjunto de imóveis aleatórios com características próprias.
+     * O arquivo consite em um montante de 10 Casas e 10 Apartamentos
+     * para cada uma das 10 cidades de um estado brasileiro.
+     * <p>Nº total de imóveis: <b>10×10×27 = 2700<b/>
+     * @author Lucas Henrique
      */
     private void geraArquivoDosImoveis(){
         manArquivosImoveis.abrirArquivoParaGravacao();
-        manArquivosImoveis.gravarImovel(gerador.geraArquivo());
+        manArquivosImoveis.gravarImoveis(gerador.geraImoveis());
         manArquivosImoveis.fechaArquivoGravacao();
     }
 
     /**
-     * 
+     * Lê um arquivo contendo as informações de cadastro dos imóveis do sistema e insta
+     * conjunto de imóveis aleatórios com características próprias já instanciadas.
+     * @author Lucas Henrique
      */
     private void leArquivosDosImoveis(){
         manArquivosImoveis.abrirArquivoParaLeitura();
         imoveisCadastrados = new ArrayList<>(manArquivosImoveis.lerArquivo());
-  
         manArquivosImoveis.fecharArquivoLeitura();
     }
 
     /**
      * Filtra dentre toda a coleção {@code imoveisCadastrados} os imóveis que atendem aos
-     * critérios passados como parâmetro e os adiciona no ArrayList {@code imoveisSelecionados}
+     * critérios passados como parâmetro e os adiciona no ArrayList {@code imoveisSelecionados}.
+     * @param alugar   Flag que indica se os imóveis são para alugar ou não
+     * @param casa_ou_apartamento  Tipo do imóveis
+     * @param estado   Estado onde estão localizados os imóveis
+     * @param cidade   Cidade em que se localizam os imóveis
      */
     public void obtemImoveisSelecionados(boolean alugar, String casa_ou_apartamento, String estado, String cidade) {
         imoveisSelecionados = new ArrayList<Imovel>();
@@ -59,7 +98,6 @@ public class JotaImoveisGerencia {
                 }    
             }
         }
-        System.out.println("Teste Aqui");
         //Procura especificamente pelos imóveis do tipo Apartamento
         if (casa_ou_apartamento.equalsIgnoreCase("Apartamento")) {
             for (Imovel temp_imovel : this.imoveisCadastrados) {
@@ -75,35 +113,9 @@ public class JotaImoveisGerencia {
         gerarImagemImovel();    //Associa uma imagem aleatória à cada Imovel da coleção
     }
 
-    /**
-     * Inicializa e lê o arquivo de imóveis
-     */
-    public JotaImoveisGerencia() {
-        manArquivosImoveis = new ManipulaArquivo("ListaDeImoveis");
-        geraArquivoDosImoveis();
-        leArquivosDosImoveis();
-    }
     
 
-    public ArrayList<Imovel> getImoveisCadastrados() {
-        return imoveisCadastrados;
-    }
-
-    public void setImoveisCadastrados(ArrayList<Imovel> imoveisCadastrados) {
-        this.imoveisCadastrados = imoveisCadastrados;
-    }
-
-    public ArrayList<Imovel> getImoveisSelecionados() {
-        return imoveisSelecionados;
-    }
-
-    public void setImoveisSelecionados(ArrayList<Imovel> imoveisSelecionados) {
-        this.imoveisSelecionados = imoveisSelecionados;
-    }
-
-    public void getGerador() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
     /**
      * Atribui à um String  caminho da imagem associada a cada imóvel selecionado da Lista

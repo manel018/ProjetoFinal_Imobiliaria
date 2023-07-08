@@ -37,7 +37,7 @@ public class ManipulaArquivo {
      * @param imoveis
      * @return
      */
-    public boolean gravarImovel(ArrayList<Imovel> imoveis) {
+    public boolean gravarImoveis(ArrayList<Imovel> imoveis) {
         
         for (Imovel temp_imovel : imoveis) {
             try {
@@ -59,7 +59,7 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Metodo capaz de abrir o arquivo para gravação.
+     * Metodo capaz de abrir o arquivo para gravação.
      */
     public void abrirArquivoParaGravacao() {
 
@@ -75,7 +75,7 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Método responsável por fechar o arquivo (gravacão) caso esteja aberto.
+     * Método responsável por fechar o arquivo (gravacão) caso esteja aberto.
      */
     public void fechaArquivoGravacao() {
         if (this.gravador != null) {
@@ -85,7 +85,7 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Método responsável por abrir o arquivo para leitura.
+     * Método responsável por abrir o arquivo para leitura.
      */
     public void abrirArquivoParaLeitura() {
         try {
@@ -96,7 +96,7 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Método responsável por fechar o arquivo caso esteja aberto para leitura.
+     * Método responsável por fechar o arquivo caso esteja aberto para leitura.
      */
     public void fecharArquivoLeitura() {
         if (this.leitor != null) {
@@ -105,8 +105,8 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Lê um arquivo e retorna uma lista de imóveis contidos.
-     * @return listaDeImoveis
+     * Lê o arquivo texto que contém todos os imóveis cadastrados no sistema.
+     * @return listaDeImoveis   ({@code ArrayList<Imovel>}) com todos os imóveis lidos do arquivo
      */
     public ArrayList<Imovel> lerArquivo() {
         /*Método responsável por ler os contatos no arquivo texto */
