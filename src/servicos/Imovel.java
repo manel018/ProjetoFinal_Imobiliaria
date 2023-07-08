@@ -4,7 +4,8 @@ import javafx.scene.image.Image;
 
 /**
  * Classe abstrata responsável por definir uma entidade padrão (imóvel) para que seja herdado pela classe casa ou apartamento
- * @author lucas
+ * 
+ * @author Lucas Henrique
  */
 public abstract class Imovel {
   
