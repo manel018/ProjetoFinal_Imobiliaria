@@ -118,7 +118,7 @@ public class LayoutPrincipalController extends ControllerMaster{
             temp = false;
         }
         
-        gerenciamento.obtemImoveisSelecionados(temp, cb_acao.getValue(), cb_estado.getValue(), cb_cidade.getValue());
+        gerenciamento.obtemImoveisSelecionados(temp, cb_imovel.getValue(), cb_estado.getValue(), cb_cidade.getValue());
         
         dados.add(gerenciamento);   //Adiciona o gerenciador de impoveis na coleção de dados do controller
         

@@ -46,7 +46,7 @@ public abstract class ControllerMaster implements Initializable{
      */
     public void chamaProximaCena(String caminhoFXML, ControllerMaster controller, ArrayList<Object> dados) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
-
+    
         controller.setDados(dados);     //Salva os dados no controller
         
         loader.setController((ControllerMaster)controller);  //Atribui o controller instanciado ao loader

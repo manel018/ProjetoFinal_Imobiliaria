@@ -38,25 +38,33 @@ public class JotaImoveisGerencia {
     }
 
     /**
-     * 
+     * Filtra dentre toda a coleção {@code imoveisCadastrados} os imóveis que atendem aos
+     * critérios passados como parâmetro e os adiciona no ArrayList {@code imoveisSelecionados}
      */
     public void obtemImoveisSelecionados(boolean alugar, String casa_ou_apartamento, String estado, String cidade) {
+        imoveisSelecionados = new ArrayList<Imovel>();
         if (alugar == true) {
             this.alugar = true;
         }
+
+        //Procura especificamente pelos imóveis do tipo Casa
         if (casa_ou_apartamento.equalsIgnoreCase("Casa")) {
             for (Imovel temp_imovel : this.imoveisCadastrados) {
-                if (temp_imovel instanceof Casa && temp_imovel.getCidade().equalsIgnoreCase(estado) && temp_imovel.getEstado().equalsIgnoreCase(estado)) {
+                if (temp_imovel instanceof Casa && temp_imovel.getEstado().equalsIgnoreCase(estado) && temp_imovel.getCidade().equalsIgnoreCase(cidade)){
+                    //Inclui os imóveis da coleção que têm os estados e cidades iguais aos dos argumentos
                     this.imoveisSelecionados.add(temp_imovel);
                 }
-                if (this.imoveisSelecionados.size() == 10) {
+                if (this.imoveisSelecionados.size() == 10){
                     break;
-                }
+                }    
             }
         }
+        System.out.println("Teste Aqui");
+        //Procura especificamente pelos imóveis do tipo Apartamento
         if (casa_ou_apartamento.equalsIgnoreCase("Apartamento")) {
             for (Imovel temp_imovel : this.imoveisCadastrados) {
-                if (temp_imovel instanceof Apartamento && temp_imovel.getCidade().equalsIgnoreCase(estado) && temp_imovel.getEstado().equalsIgnoreCase(estado)) {
+                if (temp_imovel instanceof Apartamento && temp_imovel.getCidade().equalsIgnoreCase(cidade) && temp_imovel.getEstado().equalsIgnoreCase(estado)) {
+                    //Inclui os imóveis da coleção que têm os estados e cidades iguais aos dos argumentos
                     this.imoveisSelecionados.add(temp_imovel);
                 }
                 if (this.imoveisSelecionados.size() == 10) {
@@ -114,10 +122,10 @@ public class JotaImoveisGerencia {
         for (int i = 0; i<10; i++){
             //Concatena um número aleatório da ArrayList de numeros sorteados entre 1 a 30 a cada loop
             //com o caminho relativo da imagem
-            if(this.imoveisCadastrados.get(i) instanceof Casa)
-                this.imoveisSelecionados.get(i).setfonteImagem("residencia" + numerosSorteados.get(i)); //se for do tipo Casa
+            if(this.imoveisSelecionados.get(i) instanceof Casa)
+                this.imoveisSelecionados.get(i).setfonteImagem("/GUI/imagens/imoveis/residencia" + numerosSorteados.get(i) + ".jpg"); //se for do tipo Casa
             else
-                this.imoveisSelecionados.get(i).setfonteImagem("apartamento" + numerosSorteados.get(i)); //se for Apartamento
+                this.imoveisSelecionados.get(i).setfonteImagem("/GUI/imagens/imoveis/apartamento" + numerosSorteados.get(i) + ".jpg"); //se for Apartamento
         }
     }
 }

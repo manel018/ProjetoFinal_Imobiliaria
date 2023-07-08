@@ -18,6 +18,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
@@ -36,13 +37,17 @@ import javafx.scene.layout.VBox;
 public class LayoutResultadosController extends ControllerMaster {
     //Aqui vai o gerenciador de imóveis...
 
-    @FXML
-    private GridPane imovelContainer;
+    
     private ArrayList<Imovel> listaImoveis;
     private int coluna;
     private int linha;
     private int index;
-    private Random gerador = new Random();
+
+    @FXML
+    private TextField txtPesquisar;
+
+    @FXML
+    private GridPane imovelContainer;
 
     @FXML
     private ToggleButton bt_numD1;
@@ -76,6 +81,12 @@ public class LayoutResultadosController extends ControllerMaster {
 
     @FXML
     private Label lb_nome;
+
+    @FXML
+    private TextField txtMaximo;
+
+    @FXML
+    private TextField txtMinimo;
 
     private Card_ImovelController cardController;
 
