@@ -19,7 +19,7 @@ public class JotaImoveisGerencia {
     private boolean alugar = false;
     
     /**
-     * Construtor da classe
+     * Construtor da classe gerenciadora de imóveis
      * <p>
      * Inicializa automaticamente suas variáveis, 
      * incluindo a lista {@code ArrayList<Imovel>} imoveisCadastrados

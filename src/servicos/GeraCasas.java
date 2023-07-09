@@ -250,47 +250,63 @@ public class GeraCasas {
                 for (String temp_string : conjuntoMunicipioEstado.keySet()) {
                         //Repete (quantidade de cidades) vezes
                         for (int i = 0; i < conjuntoMunicipioEstado.get(temp_string).size(); i++) {
+                                //Realiza 20 repetições (gera 10 CASAS e 10 APARTAMENTOS) para cada cidade de um estado
+                                for (int k = 0; k < 20; k++) {
+                                        
+                                        //Copia a cidade corrente da Lista de cidades do estado atual
+                                        cidade = conjuntoMunicipioEstado.get(temp_string).get(i);
 
-                                //Copia a cidade corrente da Lista de cidades do estado atual
-                                cidade = conjuntoMunicipioEstado.get(temp_string).get(i);
+                                        //copia o estado atual
+                                        estado = temp_string; 
 
-                                //copia o estado atual
-                                estado = temp_string; 
-
-                                //Realiza 10 repetições (gera 10 CASAS) para cada cidade de um estado
-                                for (int k = 0; k < 10; k++) {
-                                                
                                         //Pega um nome de condomínio aleatório da Lista nomesDoCondominio
                                         nomeDoCondominio = nomesDoCondominio.get(gerador.nextInt(nomesDoCondominio.size()));
 
-                                        //Pega uma descrição aleatória dentro da Lista descricoesCasa
-                                        descricaoImovel = descricoesCasa.get(gerador.nextInt(descricoesCasa.size()));
+                                        //Sorteia um preço entre R$200.000,00 e (<)R$1.100.000,00 para o ímovel
+                                        valor = geraDoubleRandomico(200000.0,1100000.0); 
 
-                                        //Sorteia um preço entre R$200.000,00 e (<)R$2.00.000,00 para o ímovel
-                                        valor = geraDoubleRandomico(200000.0,2000000.0);  
+                                        //Sorteia uma quantidade aleatória de garagens de um imóvel (entre 1 e 3)
+                                        vagasGaragem = gerador.nextInt(3) + 1;
 
-                                        //Sorteia uma quantidade aleatória de garagens de um imóvel (entre 1 e 4)
-                                        vagasGaragem = gerador.nextInt(4) + 1;
+                                        //Instancia uma Casa com os seus atributos específicos à cada loop (10×)
+                                        if(k<10){
+                                                //Pega uma descrição aleatória dentro da Lista descricoesCasa
+                                                descricaoImovel = descricoesCasa.get(gerador.nextInt(descricoesCasa.size()));
 
-                                        //Sorteia uma área para a casa (entre 100m² e (<)400m²)
-                                        area = geraDoubleRandomico(100.0,400.0);
+                                                //Sorteia uma área para a casa (entre 100m² e (<)400m²)
+                                                area = geraDoubleRandomico(100.0,400.0);
 
-                                        //Cria uma casa com as devidas características e a adicona na lista
-                                        Casa casa = new Casa("",nomeDoCondominio, numeroAnuncio, descricaoImovel, valor, cidade, estado, vagasGaragem,  area);
-                                        retorno.add(casa);
+                                                //Cria uma casa com as devidas características e a adicona na lista
+                                                Casa casa = new Casa("",nomeDoCondominio, numeroAnuncio, descricaoImovel, valor, cidade, estado, vagasGaragem,  area);
+                                                retorno.add(casa);
+                                        }
 
-                                        /* 
-                                        casa.setDescricaoQuintal("");
-                                        casa.setNomeDoCondominio("");
-                                        retorno.add(new Casa("", nomesDoCondominio.get(gerador.nextInt(nomesDoCondominio.size())),
-                                                numeroAnuncio, descricoesCasa.get(gerador.nextInt(descricoesCasa.size())),
-                                                (gerador.nextDouble(500000,2500000)),
-                                                conjuntoMunicipioEstado.get(temp_string).get(i),
-                                                temp_string, (gerador.nextInt(4) + 1), (gerador.nextInt(100,401))));
-                                        */
+                                        //Instancia um Apartamento com os seus atributos específicos à cada loop (10×)
+                                        if(k>9){
+                                                //Pega uma descrição aleatória dentro da Lista descricoesApartamento
+                                                descricaoImovel = descricoesApartamento.get(gerador.nextInt(descricoesApartamento.size()));
+
+                                                //Sorteia o andar de um apartamento no prédio (entre 1 e 20)
+                                                andar = gerador.nextInt(20) + 1;
+
+                                                //Sorteia uma área para o apartamento (entre 55m² e (<)150m²)
+                                                area = geraDoubleRandomico(55.0,150.0);
+
+                                                //Informa se o prédio possui ou não elevador
+                                                possuiElevador = gerador.nextBoolean();
+
+                                                //Cria um Apartamento com as devidas características e a adicona na lista
+                                                Apartamento apartamento = new Apartamento(andar, possuiElevador, numeroAnuncio, descricaoImovel, valor, cidade, estado, vagasGaragem,  area);
+                                                retorno.add(apartamento);
+                                        }
+
                                         numeroAnuncio++; //Incrementa a identificação para o próximo imóvel       
                                 }
-
+                        }
+                }
+                return retorno;         //Retorna a lista com todos os imóveis
+        }
+/* 
                                 //Realiza 10 repetições (gera 10 APARTAMENTOS) para cada cidade de um estado
                                 for (int k = 0; k < 10; k++) {
 
@@ -306,18 +322,7 @@ public class GeraCasas {
                                         //Sorteia uma quantidade aleatória de garagens de um imóvel (entre 1 e 4)
                                         vagasGaragem = gerador.nextInt(4) + 1;
 
-                                        //Sorteia o andar de um apartamento no prédio (entre 1 e 20)
-                                        andar = gerador.nextInt(20) + 1;
-
-                                        //Sorteia uma área para o apartamento (entre 40m² e (<)150m²)
-                                        area = geraDoubleRandomico(100.0,150.0);
-
-                                        //Informa se o prédio possui ou não elevador
-                                        possuiElevador = gerador.nextBoolean();
-
-                                        //Cria um Apartamento com as devidas características e a adicona na lista
-                                        Apartamento apartamento = new Apartamento(andar, possuiElevador, numeroAnuncio, descricaoImovel, valor, cidade, estado, vagasGaragem,  area);
-                                        retorno.add(apartamento);
+                                        
 
                                         /*
                                         for (String temp_string : conjuntoMunicipioEstado.keySet()) {   //Percorre os 26 estados
@@ -332,13 +337,8 @@ public class GeraCasas {
                                                 }
                                         }
                                         }
-                                        */
-                                        numeroAnuncio++; //Incrementa a identificação para o próximo imóvel                     
-                                }
-                        }
-                }
-                return retorno; //Retorna a lista com todos os imóveis
-        }
+                                        
+                                        numeroAnuncio++; //Incrementa a identificação para o próximo imóvel    */                 
 
         /**
          * Gera um número aleatório dentro do limite máximo e mínimo estabelecidos pelos argumentos

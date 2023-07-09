@@ -3,6 +3,12 @@ package controllers;
 
 import servicos.Casa;
 import servicos.Imovel;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -65,13 +71,11 @@ public class Card_ImovelController {
         //Local
         lb_imovelLocal.setText("" + imovel.getEstado()+ "/" + imovel.getCidade());
         //Valor
-        if(imovel instanceof Casa){
-            lb_imovelPreco.setText("" + imovel.getValor());
-        }
-        else{
-            lb_imovelPreco.setText("" + (imovel.getValor()*0.01));  //O aluguel é 1% do valor da casa
-        }
+        double preco = imovel.getValor();
+        lb_imovelPreco.setText("R$ " + new DecimalFormat("#,###,##0.00").format(preco));    //Formata no padrão brasileiro
         //Área
-        lb_imovelArea.setText("" + imovel.getArea());
+        lb_imovelArea.setText("" + String.format("%.2f m²", imovel.getArea()));
+        //Garagens
+        lb_imovelGaragens.setText("" + imovel.getVagasGaragem() + (imovel.getVagasGaragem()>1?" garagens":" garagem"));
     }
 }
