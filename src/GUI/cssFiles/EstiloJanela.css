@@ -69,5 +69,31 @@
 }
 
 .shadow{
-    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0), 10, 0, 0, 10);
+    -fx-effect: dropShadow(three-pass-box,rgba(0, 0, 0, 0.1), 10, 0, 0, 10);
+}
+
+.shadow:hover{
+    -fx-effect: dropShadow(three-pass-box,rgba(0, 0, 0, 0.226), 10, 0, 0, 10);
+}
+
+.focoContainer:hover {
+    -fx-scale-x: 1.29;
+    -fx-scale-y: 1.29;
+    -fx-scale-z: 1.29;
+}
+
+
+.semFoco > *{
+    -fx-opacity: 0.1;
+}
+
+.semFoco:hover {
+    -fx-opacity: 1.0;
+}
+
+.sombraInterna:hover {
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,1), 10, 0.9, 0, 0);
+}
+.sombraInternaTXT:hover {
+    -fx-effect: innershadow(gaussian, rgb(55, 98, 179), 10, 0.2, 0, 0);
 }

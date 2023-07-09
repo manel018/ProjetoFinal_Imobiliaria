@@ -15,7 +15,7 @@
             <Image url="@../imagens/fnd1.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtNome" layoutX="804.0" layoutY="357.0" onKeyPressed="#digitoTxt" prefHeight="53.0" prefWidth="199.0" promptText="Digite seu nome:">
+      <TextField fx:id="txtNome" layoutX="804.0" layoutY="357.0" onKeyPressed="#digitoTxt" prefHeight="53.0" prefWidth="199.0" promptText="Digite seu nome:" styleClass="sombraInternaTXT" stylesheets="@../cssFiles/EstiloJanela.css">
          <font>
             <Font name="Yu Gothic Medium" size="18.0" />
          </font></TextField>
@@ -39,7 +39,7 @@
             <Font name="Yu Gothic Medium" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnEntrar" layoutX="800.0" layoutY="592.0" mnemonicParsing="false" onAction="#clickBtnEntrar" prefHeight="47.0" prefWidth="208.0" style="-fx-background-color: #0000FF;" text="ENTRAR" textFill="WHITE">
+      <Button fx:id="btnEntrar" layoutX="800.0" layoutY="592.0" mnemonicParsing="false" onAction="#clickBtnEntrar" prefHeight="47.0" prefWidth="208.0" style="-fx-background-color: #0000FF;" styleClass="focoContainer" stylesheets="@../cssFiles/EstiloJanela.css" text="ENTRAR" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

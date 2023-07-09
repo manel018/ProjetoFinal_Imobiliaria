@@ -35,34 +35,14 @@ import javafx.scene.layout.VBox;
  * @author Gabriel Araujo
  */
 public class LayoutResultadosController extends ControllerMaster {
-    //Aqui vai o gerenciador de imóveis...
 
-    
     private ArrayList<Imovel> listaImoveis;
     private int coluna;
     private int linha;
     private int index;
 
     @FXML
-    private TextField txtPesquisar;
-
-    @FXML
     private GridPane imovelContainer;
-
-    @FXML
-    private ToggleButton bt_numD1;
-
-    @FXML
-    private ToggleButton bt_numD2;
-
-    @FXML
-    private ToggleButton bt_numD3;
-
-    @FXML
-    private ToggleButton bt_numD4;
-
-    @FXML
-    private ToggleButton bt_numD5;
 
     @FXML
     private ToggleButton bt_numG1;
@@ -78,15 +58,30 @@ public class LayoutResultadosController extends ControllerMaster {
 
     @FXML
     private ToggleButton bt_numG5;
+    
+    @FXML
+    private Button bt_Pesquisar;
+    
+    @FXML
+    private Button bt_Voltar;
+    
+    @FXML
+    private Label lb_Nome;
+    
+    @FXML
+    private Label lb_Caminho;
 
     @FXML
-    private Label lb_nome;
+    private TextField txtAreaMaxima;
 
     @FXML
-    private TextField txtMaximo;
+    private TextField txtAreaMinima;
 
     @FXML
-    private TextField txtMinimo;
+    private TextField txtPrecoMaximo;
+
+    @FXML
+    private TextField txtPrecoMinimo;
 
     private Card_ImovelController cardController;
 
@@ -126,7 +121,7 @@ public class LayoutResultadosController extends ControllerMaster {
                     linha++;
                 }
                 imovelContainer.add(cardBoxes.get(index),coluna++,linha);    //(objeto CardImovel, IndexColuna, IndexLinha)
-
+                
                 GridPane.setMargin(cardBoxes.get(index), new Insets(10));    //(objeto CardImovel, Distância entre compontes)
                 index++;       
             }       
@@ -140,7 +135,7 @@ public class LayoutResultadosController extends ControllerMaster {
             e.printStackTrace();
         } 
         String nome = (String) dados.get(0);    //Atribui o nome fornecido ao label nome
-        lb_nome.setText(nome);
+        lb_Nome.setText(nome);
     }
 
     //Testando a funcionalidade da filtragem de imóveis (Apagar e colocar novos imóveis condizentes com os critérios)
@@ -158,6 +153,16 @@ public class LayoutResultadosController extends ControllerMaster {
         if(event.getSource() == bt_numG2){
             imovelContainer.add(cardBoxes.get(2),1,1);
         }*/
+    }
+    
+    @FXML
+    void clickBtPesquisar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void clickBtVoltar(ActionEvent event) {
+
     }
 
     /**

@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Esta classe gerencia as informações apresentadas dentro de cada card de
@@ -63,6 +64,7 @@ public class Card_ImovelController {
          */
         //Imagem
         img_ImovelImagem.setImage(imagem);
+        img_ImovelImagem.toBack();
         if (imovel instanceof Casa)
             lb_ImovelTipo.setText("Casa");
         else{
@@ -77,5 +79,6 @@ public class Card_ImovelController {
         lb_imovelArea.setText("" + String.format("%.2f m²", imovel.getArea()));
         //Garagens
         lb_imovelGaragens.setText("" + imovel.getVagasGaragem() + (imovel.getVagasGaragem()>1?" garagens":" garagem"));
+
     }
 }
