@@ -85,7 +85,7 @@ public abstract class Imovel {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-        public int getVagasGaragem() {
+    public int getVagasGaragem() {
         return vagasGaragem;
     }
 

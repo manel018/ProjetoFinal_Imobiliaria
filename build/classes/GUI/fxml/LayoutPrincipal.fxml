@@ -27,15 +27,15 @@
          <effect>
             <SepiaTone level="0.35" />
          </effect></ImageView>
-      <ComboBox fx:id="cb_imovel" layoutX="706.0" layoutY="288.0" prefHeight="26.0" prefWidth="182.0" promptText="Apartamento / Casa">
+      <ComboBox fx:id="cb_imovel" layoutX="706.0" layoutY="288.0" prefHeight="26.0" prefWidth="182.0" promptText="Apartamento / Casa" styleClass="botoesTipo2" stylesheets="@../cssFiles/EstiloJanela.css">
          <effect>
             <SepiaTone />
          </effect></ComboBox>
-      <ComboBox fx:id="cb_estado" layoutX="706.0" layoutY="334.0" onAction="#clickEstado" prefHeight="26.0" prefWidth="182.0" promptText="Selecione">
+      <ComboBox fx:id="cb_estado" layoutX="706.0" layoutY="334.0" onAction="#clickEstado" prefHeight="26.0" prefWidth="182.0" promptText="Selecione" styleClass="botoesTipo2" stylesheets="@../cssFiles/EstiloJanela.css">
          <effect>
             <SepiaTone />
          </effect></ComboBox>
-      <ComboBox fx:id="cb_acao" layoutX="706.0" layoutY="237.0" prefHeight="26.0" prefWidth="182.0" promptText="Alugar / Comprar">
+      <ComboBox fx:id="cb_acao" layoutX="706.0" layoutY="237.0" prefHeight="26.0" prefWidth="182.0" promptText="Alugar / Comprar" styleClass="botoesTipo2" stylesheets="@../cssFiles/EstiloJanela.css">
          <effect>
             <SepiaTone />
          </effect></ComboBox>
@@ -43,11 +43,11 @@
          <font>
             <Font name="System Bold" size="19.0" />
          </font></Label>
-      <Button fx:id="bt_pesquisar" layoutX="426.0" layoutY="583.0" mnemonicParsing="false" onAction="#clickPesquisar" prefHeight="43.0" prefWidth="141.0" text="Pesquisar">
+      <Button fx:id="bt_pesquisar" layoutX="426.0" layoutY="583.0" mnemonicParsing="false" onAction="#clickPesquisar" prefHeight="43.0" prefWidth="141.0" styleClass="botoesTipo2" stylesheets="@../cssFiles/EstiloJanela.css" text="Pesquisar">
          <effect>
             <SepiaTone level="0.5" />
          </effect></Button>
-      <Button fx:id="bt_sair" layoutX="630.0" layoutY="583.0" mnemonicParsing="false" onAction="#clickSair" prefHeight="43.0" prefWidth="141.0" text="Sair">
+      <Button fx:id="bt_sair" layoutX="630.0" layoutY="583.0" mnemonicParsing="false" onAction="#clickSair" prefHeight="43.0" prefWidth="141.0" styleClass="botoesTipo2" stylesheets="@../cssFiles/EstiloJanela.css" text="Sair">
          <effect>
             <SepiaTone level="0.5" />
          </effect></Button>
@@ -89,7 +89,7 @@
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="43.0" layoutX="334.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
       <Polyline fill="#ff9908f7" layoutX="355.0" layoutY="93.0" points="-50.0, -40.0, 50.0, -40.0, 5.0, -79.27587890625, -50.0, -40.0" strokeType="INSIDE" />
-      <ComboBox fx:id="cb_cidade" disable="true" layoutX="706.0" layoutY="391.0" prefHeight="26.0" prefWidth="182.0" promptText="Selecione">
+      <ComboBox fx:id="cb_cidade" disable="true" layoutX="706.0" layoutY="391.0" prefHeight="26.0" prefWidth="182.0" promptText="Selecione" styleClass="botoesTipo2" stylesheets="@../cssFiles/EstiloJanela.css">
          <effect>
             <SepiaTone />
          </effect>

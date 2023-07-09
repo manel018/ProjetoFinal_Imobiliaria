@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
@@ -39,7 +40,6 @@ public class LayoutResultadosController extends ControllerMaster {
     private ArrayList<Imovel> listaImoveis;
     private int coluna;
     private int linha;
-    private int index;
 
     @FXML
     private GridPane imovelContainer;
@@ -83,11 +83,8 @@ public class LayoutResultadosController extends ControllerMaster {
     @FXML
     private TextField txtPrecoMinimo;
 
-    private Card_ImovelController cardController;
-
     private ArrayList<VBox> cardBoxes; 
 
-    private ToggleGroup grupoBotoesD;
     private ToggleGroup grupoBotoesG;
 
     @Override
@@ -101,8 +98,12 @@ public class LayoutResultadosController extends ControllerMaster {
 
         cardBoxes = new ArrayList<VBox>();
 
+        /**
+         * Dentro do for, o programa carrega (apenas carrega) as 10 mini janelas 
+         * do tipo Card_Controller para cada imovel da lista, em seguida ele as 
+         * apresenta na janela com os métodos filtraImoveis e adicionaImoveisPorIndice.
+         */
         try {
-            //Carrega uma mini janela do tipo Card_Controller para cada imovel da lista 
             for(Imovel imovel : listaImoveis){
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/GUI/fxml/Card_Imovel.fxml"));
@@ -112,7 +113,9 @@ public class LayoutResultadosController extends ControllerMaster {
                 
                 //Passa os atributos de cada imovel para as componentes fx do controller do Card
                 ((Card_ImovelController)loader.getController()).setDadosImovel(imovel);                   
-            }       
+            }
+            //Inicialmente, adiciona todos os imóveis (sem critérios) na janela de resultados
+            adicionaImoveisPorIndice(filtraImoveis(0, 0, 0, 0,0));       
         } catch (IOException e) {
             Alert alert = new Alert(AlertType.INFORMATION);     //Alerta de erro caso não seja
             alert.setTitle("Erro");                       //possível carregar o arquivo
@@ -121,25 +124,32 @@ public class LayoutResultadosController extends ControllerMaster {
             alert.showAndWait();
             e.printStackTrace();
         } 
-        //Inicialmente, adiciona todos os imóveis (sem critérios) na janela de resultados
-        adicionaImoveisPorIndice(filtraImoveis(0, 0, 0, 0,0));
-
-
         inicializaBotoes();
         String nome = (String) dados.get(0);    //Atribui o nome fornecido ao label nome
         lb_Nome.setText(nome);
     }
 
-    //Testando a funcionalidade da filtragem de imóveis (Apagar e colocar novos imóveis condizentes com os critérios)
     @FXML
     void clickbtNum(ActionEvent event) {
-        //Pega a 7º posição da string do id do botão e converte para inteiro
-        int idBotao = Integer.parseInt(((RadioButton)grupoBotoesG.getSelectedToggle()).getText().substring(7)); 
-        
-        
+        /*ArrayList<Toggle> botoes = new ArrayList<>(grupoBotoesG.getToggles());
+        ToggleButton botaoSelecionado = (ToggleButton)event.getSource();
+
+        //Define o botão selecionado e desabilita os demais
+        for(Toggle botao : botoes){
+            if(((ToggleButton)botao).equals(botaoSelecionado))
+                botao.setSelected(true);
+
+            else
+                botao.setSelected(false);
+        }*/
+    }
     
-        //Criar método  "public ArrayList<VBox> instanciaCards(int numDorm, int numGarg)" para adicionar os cards filtrados ao conteiner da tela
-        
+    @FXML
+    void clickBtPesquisar(ActionEvent event) {
+        refazPesquisa();
+
+
+             
 
         /* 
         if(event.getSource() == bt_numG1)
@@ -147,11 +157,6 @@ public class LayoutResultadosController extends ControllerMaster {
         if(event.getSource() == bt_numG2){
             imovelContainer.add(cardBoxes.get(2),1,1);
         }*/
-    }
-    
-    @FXML
-    void clickBtPesquisar(ActionEvent event) {
-
     }
 
     @FXML
@@ -163,14 +168,6 @@ public class LayoutResultadosController extends ControllerMaster {
      * Aplica os grupos de botões dentro de um ToggleGroup
      */
     private void inicializaBotoes(){
-        //Botões nº Dormitório
-        grupoBotoesD = new ToggleGroup();
-        bt_numG1.setToggleGroup(grupoBotoesD);
-        bt_numG2.setToggleGroup(grupoBotoesD);
-        bt_numG3.setToggleGroup(grupoBotoesD);
-        bt_numG4.setToggleGroup(grupoBotoesD);
-        bt_numG5.setToggleGroup(grupoBotoesD);
-
         //Botões nº Garagem
         grupoBotoesG = new ToggleGroup();
         bt_numG1.setToggleGroup(grupoBotoesG);
@@ -185,6 +182,10 @@ public class LayoutResultadosController extends ControllerMaster {
      * {@code listaImoveis} (dos imóveis selecionados). Os imóveis a serem
      * adicionados são aqueles cujo índice na lista corresponde aos índices
      * passados como argumento.
+     * <p>
+     * É necessário ter carregado os cards dentro da lista {@code cardBoxes}
+     * antes de poder usar este método. Uma vez carregados, não há restrições 
+     * de desempenho no programa.
      * 
      * @param indiceDosImoveis lista de Índices que referenciam cada um dos imoveis salvos na variável {@code listaImoveis}
      */
@@ -208,7 +209,9 @@ public class LayoutResultadosController extends ControllerMaster {
      * Baseado nos crtérios passados como argumento, realiza uma série de 
      * condições de modo a incluir ou descartá-lo dos índices dos imóveis selecionados
      * <p>
-     * Os índices serão os mesmos correspondentes à lista CardBoxes
+     * Os índices serão os mesmos correspondentes à lista CardBoxes. 
+     * <p>
+     * Argumento iguais a zero significa sem critério.
      * 
      * @param conjuntoImoveis Lista de imóveis a ser filtrada
      * @param numGarg   Número de Garagens
@@ -225,26 +228,71 @@ public class LayoutResultadosController extends ControllerMaster {
         boolean criterio3 = true;           
         boolean criterio4 = true;
         boolean criterio5 = true;
-        int indice = 0;
 
-        for (Imovel imovel: listaImoveis){              //Testa cada condição dos argumentos
-            if(imovel.getVagasGaragem() != numGarg)
+        for (int i = 0; i<listaImoveis.size(); i++){              //Testa cada condição dos argumentos
+            if(listaImoveis.get(i).getVagasGaragem() != numGarg && numGarg != 0.0)
                 criterio1 = false;
-            if(imovel.getArea() < areaMin && areaMin != 0.0)
+            if(listaImoveis.get(i).getArea() < areaMin && areaMin != 0.0)
                 criterio2 = false;
-            if(imovel.getArea() > areaMax && areaMax != 0.0)
+            if(listaImoveis.get(i).getArea() > areaMax && areaMax != 0.0)
                 criterio3 = false;
-            if(imovel.getValor() < precoMin && precoMin != 0.0)
+            if(listaImoveis.get(i).getValor() < precoMin && precoMin != 0.0)
                 criterio4 = false;
-            if(imovel.getValor() > precoMax && precoMax != 0.0)
+            if(listaImoveis.get(i).getValor() > precoMax && precoMax != 0.0)
                 criterio5 =  false;
 
             if(criterio1 && criterio2 && criterio3 && criterio4 && criterio5)   //Faz o teste da intersecção das condições
-                indiceImoveisFiltrados.add(indice);
-            
-            indice++;
+                indiceImoveisFiltrados.add(i);
+            criterio1 = true;               
+            criterio2 = true;                   //Reseta o valor de todas as flags para true
+            criterio3 = true;           
+            criterio4 = true;
+            criterio5 = true;
         }
         return indiceImoveisFiltrados;      //Retorna a ArrayList
+    }
+
+
+    /**
+     * Recarrega o gridPane selecionando para apresentar apenas os cards 
+     * que correspondem aos critérios de Área, n° de Garagens e Preço
+     */
+    private void refazPesquisa(){
+        //Pega a 7º posição da string do id do botão e converte para inteiro
+        int numGarg = 0;
+        double areaMin = 0.0;
+        double areaMax = 0.0;
+        double precoMin = 0.0;
+        double precoMax = 0.0;
+        try{
+            //Se as strings das entradas não forem nulas, leia e converta seu valor para Double
+            if(!(txtAreaMinima.getText().equals("")))
+                areaMin = Double.parseDouble(txtAreaMinima.getText());
+
+            if(!(txtAreaMaxima.getText().equals("")))
+                areaMax = Double.parseDouble(txtAreaMaxima.getText());
+
+            if(!(txtPrecoMinimo.getText().equals("")))
+                precoMin = Double.parseDouble(txtPrecoMinimo.getText());
+
+            if(!(txtPrecoMaximo.getText().equals("")))
+                precoMax = Double.parseDouble(txtPrecoMaximo.getText());
+
+            if(!(grupoBotoesG.getSelectedToggle() == null));  //verifica se algum botao está pressionado
+                numGarg = Integer.parseInt(((ToggleButton)grupoBotoesG.getSelectedToggle()).getText());
+
+        }   catch (NumberFormatException e){
+            Alert alert = new Alert(AlertType.INFORMATION);     //Alerta de erro caso o formato
+            alert.setTitle("Ops...");                         //do número seja fora do padrão
+            alert.setHeaderText(null);  
+            alert.setContentText("Alguma das entradas fornecidas é inválida");
+            alert.showAndWait();
+            e.printStackTrace();
+        }
+        imovelContainer.getChildren().clear();  //Limpa todos os cards atuais da janela
+
+        //Adiciona somente os imóveis que atendem aos dados critérios na janela de resultados
+        adicionaImoveisPorIndice(filtraImoveis(numGarg, areaMin, areaMax, precoMin, precoMax));  
     }
 
 }

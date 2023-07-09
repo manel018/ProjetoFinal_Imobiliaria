@@ -45,6 +45,11 @@
     -fx-background-color: #F3F3F3;
 }
 
+/*Destaque de seleção*/
+.botoesTipo2:selected{
+    -fx-background-color: #dbe2e6;
+}
+
 /*Estilo botao 3*/
 .botoesTipo3 {
     -fx-background-color:
