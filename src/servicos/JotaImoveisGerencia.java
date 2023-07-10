@@ -2,7 +2,6 @@ package servicos;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 import servicos.manipulacaoarquivos.ManipulaArquivo;
 
@@ -115,10 +114,6 @@ public class JotaImoveisGerencia {
         gerarImagemImovel();    //Associa uma imagem aleatória à cada Imovel da coleção
     }
 
-    
-
-    
-    
     /**
      * Atribui à um String  caminho da imagem associada a cada imóvel selecionado da Lista
      * 

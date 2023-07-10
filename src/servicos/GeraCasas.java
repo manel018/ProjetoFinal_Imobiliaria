@@ -305,40 +305,7 @@ public class GeraCasas {
                         }
                 }
                 return retorno;         //Retorna a lista com todos os imóveis
-        }
-/* 
-                                //Realiza 10 repetições (gera 10 APARTAMENTOS) para cada cidade de um estado
-                                for (int k = 0; k < 10; k++) {
-
-                                        //Pega um nome de condomínio aleatório da Lista nomesDoCondominio
-                                        nomeDoCondominio = nomesDoCondominio.get(gerador.nextInt(nomesDoCondominio.size()));
-
-                                        //Pega uma descrição aleatória dentro da Lista descricoesApartamento
-                                        descricaoImovel = descricoesApartamento.get(gerador.nextInt(descricoesApartamento.size()));
-
-                                        //Sorteia um preço entre R$200.000,00 e (<)R$2.00.000,00 para o ímovel
-                                        valor = geraDoubleRandomico(200000.0,2000000.0);
-
-                                        //Sorteia uma quantidade aleatória de garagens de um imóvel (entre 1 e 4)
-                                        vagasGaragem = gerador.nextInt(4) + 1;
-
-                                        
-
-                                        /*
-                                        for (String temp_string : conjuntoMunicipioEstado.keySet()) {   //Percorre os 26 estados
-                                        for (int k = 0; k < 10; k++) {
-                                                for (int i = 0; i < conjuntoMunicipioEstado.get(temp_string).size(); i++) {
-                                                retorno.add(new Apartamento(gerador.nextInt(20), gerador.nextBoolean(), numeroAnuncio,
-                                                        descricoesApartamento.get(gerador.nextInt(descricoesApartamento.size())),
-                                                        (100000 + gerador.nextInt(1000000000)),
-                                                        conjuntoMunicipioEstado.get(temp_string)
-                                                                .get(gerador.nextInt(conjuntoMunicipioEstado.get(temp_string).size())),
-                                                        temp_string, (gerador.nextInt(4) + 1), (gerador.nextInt(400) + 10.0)));
-                                                }
-                                        }
-                                        }
-                                        
-                                        numeroAnuncio++; //Incrementa a identificação para o próximo imóvel    */                 
+        }   
 
         /**
          * Gera um número aleatório dentro do limite máximo e mínimo estabelecidos pelos argumentos

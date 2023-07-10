@@ -15,12 +15,21 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import servicos.Imovel;
 
 
+/**
+ * Esta classe é responsável por administrar os componentes da janela <b>LayoutPagamento.fxml</b>. <p>Nesta classe
+ * estão todos os métodos de tratamento dos eventos que são gerados pela interação do usuário com os
+ * componentes da janela.
+ * 
+ * @author Emanuel Victor
+ * @author Lucas Souza
+ * @author Caio Lopes
+ * @author Gabriel Araujo
+ */
 public class LayoutPagamentoController  extends ControllerMaster implements Initializable{
 
     @FXML

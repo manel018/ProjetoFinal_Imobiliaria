@@ -26,6 +26,16 @@ import javafx.stage.Stage;
 import servicos.GeraCasas;
 import servicos.JotaImoveisGerencia;
 
+/**
+ * Esta classe é responsável por administrar os componentes da janela <b>LayoutPrincipal.fxml</b>. <p>Nesta classe
+ * estão todos os métodos de tratamento dos eventos que são gerados pela interação do usuário com os
+ * componentes da janela.
+ * 
+ * @author Emanuel Victor
+ * @author Lucas Souza
+ * @author Caio Lopes
+ * @author Gabriel Araujo
+ */
 public class LayoutPrincipalController extends ControllerMaster implements Initializable{
     @FXML
     private Button bt_pesquisar;
@@ -65,6 +75,9 @@ public class LayoutPrincipalController extends ControllerMaster implements Initi
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
 
+        /*
+         * Inicializa o conteúdo de cada ComboBox 
+         */
         ObservableList<String> casaApto = FXCollections.observableArrayList();  
         casaApto.add("Apartamento"); casaApto.add("Casa");                  
         cb_imovel.setItems(casaApto);
@@ -92,10 +105,20 @@ public class LayoutPrincipalController extends ControllerMaster implements Initi
         label4.setBackground(background);
         gerenciamento = new JotaImoveisGerencia();
     } 
+
+    /**
+     * Trata o evento de clicar no botão Sair
+     * @param event
+     */
     @FXML
     void clickSair(ActionEvent event) {
         System.exit(0);
     }
+
+    /**
+     * Trata o evento de clicar no botão Estado
+     * @param event
+     */
     @FXML
     void clickEstado(ActionEvent event) {
 

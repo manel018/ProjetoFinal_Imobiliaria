@@ -1,7 +1,5 @@
 package controllers;
 
-import controllers.ControllerMaster;
-
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -18,6 +16,17 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import servicos.Imovel;
 
+/**
+ * Esta classe é responsável por administrar os componentes da janela <b>LayoutDescricao.fxml</b>, consistida na fase
+ * de exibição de uma residência que foi escolhida para comprar. <p>Nesta classe
+ * estão todos os métodos de tratamento dos eventos que são gerados pela interação do usuário com os
+ * componentes da janela.
+ * 
+ * @author Emanuel Victor
+ * @author Lucas Souza
+ * @author Caio Lopes
+ * @author Gabriel Araujo
+ */
 public class LayoutDescricaoController extends ControllerMaster implements Initializable{
 
     /*
@@ -50,9 +59,7 @@ public class LayoutDescricaoController extends ControllerMaster implements Initi
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         imovelEscolhido = (Imovel)dados.get(0);
-        caminho = (String)dados.get(1);
-
-        
+        caminho = (String)dados.get(1); 
 
         //Preenche os elementos FX
         //Imagem
@@ -69,8 +76,6 @@ public class LayoutDescricaoController extends ControllerMaster implements Initi
         //Preço
         double preco = imovelEscolhido.getValor();
         txt_Preco.setText("R$ " + new DecimalFormat("#,###,##0.00").format(preco));    //Formata no padrão brasileiro
-
-
     } 
 
     //Eventos de tratamento de clique

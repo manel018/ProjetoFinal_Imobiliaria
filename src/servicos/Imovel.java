@@ -1,7 +1,4 @@
 package servicos;
-
-import javafx.scene.image.Image;
-
 /**
  * Classe abstrata responsável por definir uma entidade padrão (imóvel) para que seja herdado pela classe casa ou apartamento
  * 
@@ -100,36 +97,4 @@ public abstract class Imovel {
     public void setArea(double area) {
         this.area = area;
     }
-
-    /**
-     * Converte uma {@code String} com o caminho de uma imagem para 
-     * o objeto do tipo {@code Image}.
-     * 
-     * @param fonteImagem Caminho relativo de um arquivo imagem
-     * @return Instância de {@code Image} associada ao argumento.
-     * 
-     * @author Emanuel Victor
-     * @author Lucas Souza
-     * @author Caio Lopes
-     * @author Gabriel Araujo
-     */
-    private Image instanciarImagem(String fonteImagem){
-        Image imagem = new Image(getClass().getResourceAsStream(fonteImagem));
-        return imagem;
-    }
-
-    /**
-     * Indica se algum outro imóvel é igual a este.
-     * <p>Para isto, compara os atributos {@code cidade} e {@code estado}, além de 
-     * verificar se ambos são instâncias das subclasses {@code Casa} ou {@code Apartamento}
-     * 
-     * @param imovelComparado objeto {@code Imovel} que se deseja comparar
-     * @return {@code true} se respectivos atributos do imóvel coincide com os do Imóvel do argumento; {@code false} caso contrário. 
-     
-    public boolean igualA(Imovel imovelComparado){
-        if(imovelComparado.getCidade().equalsIgnoreCase(cidade) && imovelComparado.getEstado().equalsIgnoreCase(estado))
-            return true;
-        else
-            return false;
-        }*/
 }
