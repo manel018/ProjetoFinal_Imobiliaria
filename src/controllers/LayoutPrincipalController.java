@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -25,7 +26,17 @@ import javafx.stage.Stage;
 import servicos.GeraCasas;
 import servicos.JotaImoveisGerencia;
 
-public class LayoutPrincipalController extends ControllerMaster{
+/**
+ * Esta classe é responsável por administrar os componentes da janela <b>LayoutPrincipal.fxml</b>. <p>Nesta classe
+ * estão todos os métodos de tratamento dos eventos que são gerados pela interação do usuário com os
+ * componentes da janela.
+ * 
+ * @author Emanuel Victor
+ * @author Lucas Souza
+ * @author Caio Lopes
+ * @author Gabriel Araujo
+ */
+public class LayoutPrincipalController extends ControllerMaster implements Initializable{
     @FXML
     private Button bt_pesquisar;
 
@@ -64,6 +75,9 @@ public class LayoutPrincipalController extends ControllerMaster{
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
 
+        /*
+         * Inicializa o conteúdo de cada ComboBox 
+         */
         ObservableList<String> casaApto = FXCollections.observableArrayList();  
         casaApto.add("Apartamento"); casaApto.add("Casa");                  
         cb_imovel.setItems(casaApto);
@@ -78,9 +92,9 @@ public class LayoutPrincipalController extends ControllerMaster{
         cb_estado.setItems(listaEstados);
          
         
-        ObservableList<String> oq = FXCollections.observableArrayList();
-        oq.add("Alugar"); oq.add("Comprar");
-        cb_acao.setItems(oq);
+        ObservableList<String> operacao = FXCollections.observableArrayList();
+        operacao.add("Alugar"); operacao.add("Comprar");
+        cb_acao.setItems(operacao);
          
         BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
         Background background = new Background(backgroundFill);
@@ -91,10 +105,20 @@ public class LayoutPrincipalController extends ControllerMaster{
         label4.setBackground(background);
         gerenciamento = new JotaImoveisGerencia();
     } 
+
+    /**
+     * Trata o evento de clicar no botão Sair
+     * @param event
+     */
     @FXML
     void clickSair(ActionEvent event) {
         System.exit(0);
     }
+
+    /**
+     * Trata o evento de clicar no botão Estado
+     * @param event
+     */
     @FXML
     void clickEstado(ActionEvent event) {
 
@@ -111,16 +135,21 @@ public class LayoutPrincipalController extends ControllerMaster{
     */
     @FXML
     void clickPesquisar(ActionEvent event) {
-        boolean temp;
+        boolean acao;
         if(cb_acao.getValue().equalsIgnoreCase("Alugar")){
-            temp = true;
+            acao = true;
         }else{
-            temp = false;
+            acao = false;
         }
+
+        String caminho = acao?"Alugar":"Comprar";    //Atribui ao label a acao escolhida pelo usuário
+        caminho += String.format("> %s > %s > %s", cb_imovel.getValue(), cb_estado.getValue(), cb_cidade.getValue());
         
-        gerenciamento.obtemImoveisSelecionados(temp, cb_imovel.getValue(), cb_estado.getValue(), cb_cidade.getValue());
-        
-        dados.add(gerenciamento);   //Adiciona o gerenciador de impoveis na coleção de dados do controller
+        //Instancia os imóveis da cidade escolhida em uma lista
+        gerenciamento.obtemImoveisSelecionados(acao, cb_imovel.getValue(), cb_estado.getValue(), cb_cidade.getValue());
+
+        dados.add(caminho);    //Adiciona o caminho de decisões do usuário
+        dados.add(gerenciamento);   //Adiciona o gerenciador de imoveis na coleção de dados do controller
         
         LayoutResultadosController resultadosController = new LayoutResultadosController();
         try {

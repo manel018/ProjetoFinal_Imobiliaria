@@ -11,8 +11,15 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+/**
+ * Classe main responsável por executar a primeira cena do programa.
+ * Aqui também é onde é reproduzido a mídia de áudio do sistema.
+ */
 public class App extends Application {
     
+    /**
+     * Carrega 
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/GUI/fxml/LayoutLogin.fxml"));

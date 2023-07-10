@@ -34,18 +34,20 @@ public class ManipulaArquivo {
     /**
      * Grava uma lista de imoveis em um arquivo texto.
      * 
-     * @param imoveis
-     * @return
+     * @param imoveis ArrayList com os imóveis a serem gravados
+     * @return  {@code true} se a gravação for bem sucedida. {@code false}, caso contrário
      */
-    public boolean gravarImovel(ArrayList<Imovel> imoveis) {
-        
+    public boolean gravarImoveis(ArrayList<Imovel> imoveis) {
+        //Percorre todo o ArrayList
         for (Imovel temp_imovel : imoveis) {
             try {
                 if (temp_imovel instanceof Casa) {
                     String flag_casa = "Casa";
+                    //Grava os atributos de um objeto Casa
                     this.gravador.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", flag_casa, temp_imovel.getNumeroDoAnuncio(), temp_imovel.getDescricao(), temp_imovel.getValor(), temp_imovel.getCidade(), temp_imovel.getEstado(), temp_imovel.getVagasGaragem(), temp_imovel.getArea(), ((Casa) temp_imovel).getDescricaoQuintal(), ((Casa) temp_imovel).getNomeDoCondominio());
                 } else if (temp_imovel instanceof Apartamento) {
                     String flag_apartamento = "Apartamento";
+                    //Grava os atributos de um objeto Apartamento
                     this.gravador.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", flag_apartamento, temp_imovel.getNumeroDoAnuncio(), temp_imovel.getDescricao(), temp_imovel.getValor(), temp_imovel.getCidade(), temp_imovel.getEstado(), temp_imovel.getVagasGaragem(), temp_imovel.getArea(), ((Apartamento) temp_imovel).getAndar(), ((Apartamento) temp_imovel).isPossuiElevador());
                 }
             } catch (FormatterClosedException formatterClosedException) {
@@ -59,7 +61,7 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Metodo capaz de abrir o arquivo para gravação.
+     * Metodo capaz de abrir o arquivo para gravação.
      */
     public void abrirArquivoParaGravacao() {
 
@@ -75,7 +77,7 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Método responsável por fechar o arquivo (gravacão) caso esteja aberto.
+     * Método responsável por fechar o arquivo (gravacão) caso esteja aberto.
      */
     public void fechaArquivoGravacao() {
         if (this.gravador != null) {
@@ -85,7 +87,7 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Método responsável por abrir o arquivo para leitura.
+     * Método responsável por abrir o arquivo para leitura.
      */
     public void abrirArquivoParaLeitura() {
         try {
@@ -96,7 +98,7 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Método responsável por fechar o arquivo caso esteja aberto para leitura.
+     * Método responsável por fechar o arquivo caso esteja aberto para leitura.
      */
     public void fecharArquivoLeitura() {
         if (this.leitor != null) {
@@ -105,23 +107,36 @@ public class ManipulaArquivo {
     }
 
     /**
-     *Lê um arquivo e retorna uma lista de imóveis contidos.
-     * @return listaDeImoveis
+     * Lê o arquivo texto que contém todos os imóveis cadastrados no arquivo texto.
+     * @return Lista de imóveis do tipo com todos os imóveis lidos do arquivo
      */
     public ArrayList<Imovel> lerArquivo() {
-        /*Método responsável por ler os contatos no arquivo texto */
         ArrayList<Imovel> retorno = new ArrayList<>();
-        while (leitor.hasNext()) {
-            String linha = leitor.nextLine();
-            String[] dados = linha.split("\t");
-            int numeroDoAnuncio = Integer.parseInt(dados[1]);
-            String descricao = dados[2];
-            double valor = Double.parseDouble(dados[3]);
-            String cidade = dados[4];
-            String estado = dados[5];
-            int vagasGaragem = Integer.parseInt(dados[6]);
-            double area = Double.parseDouble(dados[7]);
 
+        //Variáveis locais para receberem os dados de um imóvel à cada iteração
+        String[] dados;
+        String descricao;
+        String cidade;
+        String estado;
+        int numeroDoAnuncio;
+        int vagasGaragem;
+        double valor;
+        double area;
+
+        while (leitor.hasNext()) {
+            String linha = leitor.nextLine();   //Obtém todo o arquivo em uma String
+
+            //Divide cada linha da String em um vetor e copia os dados para variáveis locais
+            dados = linha.split("\t"); 
+            numeroDoAnuncio = Integer.parseInt(dados[1]);
+            descricao = dados[2];
+            valor = Double.parseDouble(dados[3]);
+            cidade = dados[4];
+            estado = dados[5];
+            vagasGaragem = Integer.parseInt(dados[6]);
+            area = Double.parseDouble(dados[7]);
+
+            //Se o imóvel for uma instância de Casa, acrescenta-se os atributos descrição do quintal e nome do condomínio
             if (dados[0].equalsIgnoreCase("Casa")) {
                 //String descricaoQuintal, String nomeDoCondominio, int numeroDoAnuncio, String descricao, double valor, String cidade, String estado, int vagasGaragem, double area
                 String descricaoQuintal = dados[8];
@@ -129,6 +144,7 @@ public class ManipulaArquivo {
                 Casa temp_casa;
                 temp_casa = new Casa(descricaoQuintal, nomeDoCondominio, numeroDoAnuncio, descricao, valor, cidade, estado, vagasGaragem, area);
                 retorno.add(temp_casa);
+            //Se o imóvel for uma instância de Apartamento, acrescenta-se a informação de andar e a existência de elevador
             } else if (dados[0].equalsIgnoreCase("Apartamento")) {
                 int andar = Integer.parseInt(dados[8]);
                 boolean possuiElevador = Boolean.parseBoolean(dados[9]);
