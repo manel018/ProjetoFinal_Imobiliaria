@@ -39,15 +39,7 @@
             <Bloom />
          </effect>
       </Text>
-      <Text layoutX="690.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="focoSutil" text="Por favor, faça login" wrappingWidth="356.1240234375">
-         <font>
-            <Font name="Loma Bold" size="36.0" />
-         </font>
-         <effect>
-            <Bloom />
-         </effect>
-      </Text>
-      <Text layoutX="690.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="focoSutil" text="Faça o login no programa" wrappingWidth="467.0">
+      <Text layoutX="690.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="focoSutil" text="Faça o login no programa" wrappingWidth="467.0">
          <font>
             <Font name="Loma Bold" size="36.0" />
          </font>
