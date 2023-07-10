@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
  * @author Caio Lopes
  * @author Gabriel Araujo
  */
-public class LayoutLoginController extends ControllerMaster{
+public class LayoutLoginController extends ControllerMaster implements Initializable{
     @FXML
     private Button btnEntrar;
     @FXML

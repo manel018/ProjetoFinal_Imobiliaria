@@ -4,16 +4,19 @@ package controllers;
 import servicos.Casa;
 import servicos.Imovel;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
-import java.util.Locale;
+import java.util.ArrayList;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Esta classe gerencia as informações apresentadas dentro de cada card de
@@ -25,7 +28,7 @@ import javafx.scene.input.MouseEvent;
  * @author Caio Lopes
  * @author Gabriel Araujo
  */
-public class Card_ImovelController {
+public class Card_ImovelController extends ControllerMaster {
     // Atributos da classe
     @FXML
     private ImageView img_ImovelImagem;
@@ -39,7 +42,12 @@ public class Card_ImovelController {
     private Label lb_imovelLocal;
     @FXML
     private Label lb_imovelPreco;
+    @FXML
+    private VBox BoxCard;
 
+    private Imovel imovelDocard;
+
+    private String etapas;
 
     /**
      * Passa os dados de um imóvel salvo no programa para
@@ -53,6 +61,7 @@ public class Card_ImovelController {
      * @author Gabriel Araujo
      */
     public void setDadosImovel(Imovel imovel){
+        imovelDocard = imovel;
         /* 
          * Cria uma instância de Image por meio da String do objeto imovel
          * que contém o caminho relativo do arquivo imagem no sistema
@@ -64,7 +73,6 @@ public class Card_ImovelController {
          */
         //Imagem
         img_ImovelImagem.setImage(imagem);
-        img_ImovelImagem.toBack();
         if (imovel instanceof Casa)
             lb_ImovelTipo.setText("Casa");
         else{
@@ -79,6 +87,37 @@ public class Card_ImovelController {
         lb_imovelArea.setText("" + String.format("%.2f m²", imovel.getArea()));
         //Garagens
         lb_imovelGaragens.setText("" + imovel.getVagasGaragem() + (imovel.getVagasGaragem()>1?" garagens":" garagem"));
+    }
+    public void setCaminho(String caminho){
+        etapas = caminho;
+    }
 
+
+    /**
+     * Chama o cena Descrição em resposta ao evento de clique no Vbox
+     * 
+     * @param event Clique no vbox
+     */
+    @FXML
+    void clickBox(MouseEvent event) {
+        dados = new ArrayList<Object>();
+        dados.add(imovelDocard);    // Salva o objeto Imovel correspondente ao card
+        dados.add(etapas);
+        LayoutDescricaoController descricaoController = new LayoutDescricaoController(); //Classe controller da proxima cena
+        try {
+            //Chama a próxima cena enviando a coleção de dados (com o Imovel do card) para o próximo controller
+            chamaProximaCena("/GUI/fxml/LayoutDescricao.fxml", descricaoController, dados);
+            
+            //Fecha a janela atual
+            Stage stageLocal = (Stage) lb_ImovelTipo.getScene().getWindow();    
+            stageLocal.close();
+        } catch (IOException e) {
+            Alert alert = new Alert(AlertType.INFORMATION);     //Alerta de erro caso não seja
+            alert.setTitle("Erro");                       //possível carregar o arquivo
+            alert.setHeaderText(null);  
+            alert.setContentText("Tivemos problemas ao carregar as informações...");
+            alert.showAndWait();
+            e.printStackTrace();
+        }
     }
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,7 +19,7 @@ import javafx.stage.Stage;
  * @author Caio Lopes
  * @author Gabriel Araujo
  */
-public abstract class ControllerMaster implements Initializable{
+public abstract class ControllerMaster{
     protected ArrayList<Object> dados;   //Armazena todos os dados da controller corrente
     protected Stage stage;
     protected Scene scene;

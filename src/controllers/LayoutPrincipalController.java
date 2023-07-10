@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
 import servicos.GeraCasas;
 import servicos.JotaImoveisGerencia;
 
-public class LayoutPrincipalController extends ControllerMaster{
+public class LayoutPrincipalController extends ControllerMaster implements Initializable{
     @FXML
     private Button bt_pesquisar;
 
@@ -78,9 +79,9 @@ public class LayoutPrincipalController extends ControllerMaster{
         cb_estado.setItems(listaEstados);
          
         
-        ObservableList<String> oq = FXCollections.observableArrayList();
-        oq.add("Alugar"); oq.add("Comprar");
-        cb_acao.setItems(oq);
+        ObservableList<String> operacao = FXCollections.observableArrayList();
+        operacao.add("Alugar"); operacao.add("Comprar");
+        cb_acao.setItems(operacao);
          
         BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, javafx.geometry.Insets.EMPTY);
         Background background = new Background(backgroundFill);
@@ -111,16 +112,21 @@ public class LayoutPrincipalController extends ControllerMaster{
     */
     @FXML
     void clickPesquisar(ActionEvent event) {
-        boolean temp;
+        boolean acao;
         if(cb_acao.getValue().equalsIgnoreCase("Alugar")){
-            temp = true;
+            acao = true;
         }else{
-            temp = false;
+            acao = false;
         }
+
+        String caminho = acao?"Alugar":"Comprar";    //Atribui ao label a acao escolhida pelo usuário
+        caminho += String.format("> %s > %s > %s", cb_imovel.getValue(), cb_estado.getValue(), cb_cidade.getValue());
         
-        gerenciamento.obtemImoveisSelecionados(temp, cb_imovel.getValue(), cb_estado.getValue(), cb_cidade.getValue());
-        
-        dados.add(gerenciamento);   //Adiciona o gerenciador de impoveis na coleção de dados do controller
+        //Instancia os imóveis da cidade escolhida em uma lista
+        gerenciamento.obtemImoveisSelecionados(acao, cb_imovel.getValue(), cb_estado.getValue(), cb_cidade.getValue());
+
+        dados.add(caminho);    //Adiciona o caminho de decisões do usuário
+        dados.add(gerenciamento);   //Adiciona o gerenciador de imoveis na coleção de dados do controller
         
         LayoutResultadosController resultadosController = new LayoutResultadosController();
         try {

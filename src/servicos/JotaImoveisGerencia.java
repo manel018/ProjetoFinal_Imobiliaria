@@ -16,7 +16,6 @@ public class JotaImoveisGerencia {
     private ArrayList<Imovel> imoveisSelecionados;
     private GeraCasas gerador;
     private ManipulaArquivo manArquivosImoveis;
-    private boolean alugar = false;
     
     /**
      * Construtor da classe gerenciadora de imóveis
@@ -82,14 +81,14 @@ public class JotaImoveisGerencia {
      */
     public void obtemImoveisSelecionados(boolean alugar, String casa_ou_apartamento, String estado, String cidade) {
         imoveisSelecionados = new ArrayList<Imovel>();
-        if (alugar == true) {
-            this.alugar = true;
-        }
 
         //Procura especificamente pelos imóveis do tipo Casa
         if (casa_ou_apartamento.equalsIgnoreCase("Casa")) {
             for (Imovel temp_imovel : this.imoveisCadastrados) {
                 if (temp_imovel instanceof Casa && temp_imovel.getEstado().equalsIgnoreCase(estado) && temp_imovel.getCidade().equalsIgnoreCase(cidade)){
+                    if(alugar)
+                        //As parcelas do aluguel são 0,5% do valor da casa
+                        temp_imovel.setValor(temp_imovel.getValor()*0.005);
                     //Inclui os imóveis da coleção que têm os estados e cidades iguais aos dos argumentos
                     this.imoveisSelecionados.add(temp_imovel);
                 }
@@ -102,6 +101,9 @@ public class JotaImoveisGerencia {
         if (casa_ou_apartamento.equalsIgnoreCase("Apartamento")) {
             for (Imovel temp_imovel : this.imoveisCadastrados) {
                 if (temp_imovel instanceof Apartamento && temp_imovel.getCidade().equalsIgnoreCase(cidade) && temp_imovel.getEstado().equalsIgnoreCase(estado)) {
+                    if(alugar)
+                        //As parcelas do aluguel são 0,5% do valor do apartamento
+                        temp_imovel.setValor(temp_imovel.getValor()*0.005);
                     //Inclui os imóveis da coleção que têm os estados e cidades iguais aos dos argumentos
                     this.imoveisSelecionados.add(temp_imovel);
                 }

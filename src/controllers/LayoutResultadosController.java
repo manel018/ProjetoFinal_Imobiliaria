@@ -12,9 +12,12 @@ import servicos.JotaImoveisGerencia;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -24,6 +27,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Esta classe é responsável por administrar os componentes da janela <b>LayoutPrincipal.fxml</b>. <p>Nesta classe
@@ -35,7 +39,7 @@ import javafx.scene.layout.VBox;
  * @author Caio Lopes
  * @author Gabriel Araujo
  */
-public class LayoutResultadosController extends ControllerMaster {
+public class LayoutResultadosController extends ControllerMaster implements Initializable{
 
     private ArrayList<Imovel> listaImoveis;
     private int coluna;
@@ -63,9 +67,6 @@ public class LayoutResultadosController extends ControllerMaster {
     private Button bt_Pesquisar;
     
     @FXML
-    private Button bt_Voltar;
-    
-    @FXML
     private Label lb_Nome;
     
     @FXML
@@ -90,13 +91,21 @@ public class LayoutResultadosController extends ControllerMaster {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Atribui a lista de imóveis filtrados vindos da janela anterior à variável listaImoveis
-        JotaImoveisGerencia gerenciador = (JotaImoveisGerencia)dados.get(1);
+        JotaImoveisGerencia gerenciador = (JotaImoveisGerencia)dados.get(2);
         //Atribui a lista de imóveis filtrados vindos da janela anterior à variável listaImoveis
         listaImoveis = gerenciador.getImoveisSelecionados();
 
         //Carrega na janela os cards de cada imovel selecionado 
 
         cardBoxes = new ArrayList<VBox>();
+
+
+        inicializaBotoes();
+        String nome = (String) dados.get(0);    //Atribui o nome fornecido ao label nome
+        lb_Nome.setText(nome);
+
+        String caminho = (String) dados.get(1); //Atribui o caminho de escolhas feitas pelo usuário
+        lb_Caminho.setText(caminho);
 
         /**
          * Dentro do for, o programa carrega (apenas carrega) as 10 mini janelas 
@@ -112,7 +121,8 @@ public class LayoutResultadosController extends ControllerMaster {
                 cardBoxes.add(loader.load());   //de uma hierarquia de todos os objetos fxml do arquivo
                 
                 //Passa os atributos de cada imovel para as componentes fx do controller do Card
-                ((Card_ImovelController)loader.getController()).setDadosImovel(imovel);                   
+                ((Card_ImovelController)loader.getController()).setDadosImovel(imovel);    
+                ((Card_ImovelController)loader.getController()).setCaminho(caminho);                 
             }
             //Inicialmente, adiciona todos os imóveis (sem critérios) na janela de resultados
             adicionaImoveisPorIndice(filtraImoveis(0, 0, 0, 0,0));       
@@ -124,44 +134,16 @@ public class LayoutResultadosController extends ControllerMaster {
             alert.showAndWait();
             e.printStackTrace();
         } 
-        inicializaBotoes();
-        String nome = (String) dados.get(0);    //Atribui o nome fornecido ao label nome
-        lb_Nome.setText(nome);
     }
 
     @FXML
     void clickbtNum(ActionEvent event) {
-        /*ArrayList<Toggle> botoes = new ArrayList<>(grupoBotoesG.getToggles());
-        ToggleButton botaoSelecionado = (ToggleButton)event.getSource();
-
-        //Define o botão selecionado e desabilita os demais
-        for(Toggle botao : botoes){
-            if(((ToggleButton)botao).equals(botaoSelecionado))
-                botao.setSelected(true);
-
-            else
-                botao.setSelected(false);
-        }*/
+        refazPesquisa();
     }
     
     @FXML
     void clickBtPesquisar(ActionEvent event) {
         refazPesquisa();
-
-
-             
-
-        /* 
-        if(event.getSource() == bt_numG1)
-            imovelContainer.getChildren().clear();
-        if(event.getSource() == bt_numG2){
-            imovelContainer.add(cardBoxes.get(2),1,1);
-        }*/
-    }
-
-    @FXML
-    void clickBtVoltar(ActionEvent event) {
-
     }
 
     /**

@@ -63,7 +63,7 @@
          <font>
             <Font name="System Bold" size="19.0" />
          </font></Label>
-      <Text layoutX="425.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CGEL">
+      <Text layoutX="425.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JOTA">
          <font>
             <Font name="Loma Bold" size="69.0" />
          </font>
